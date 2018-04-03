@@ -1,0 +1,27 @@
+/*
+ * SquarePitfall.h
+ *
+ *  Created on: 29 mar 2018
+ *  Author: Matteo
+ */
+
+#ifndef SQUARE_SQUAREPITFALL_H_
+#define SQUARE_SQUAREPITFALL_H_
+#include "Square.h"
+
+extern int prices[];
+
+
+class SquarePitfall:public Square {
+private:
+	int cost;
+	bool bought = false;	//already bought by any player?
+public:
+	SquarePitfall();
+	void setCost(int n);
+	int getCost();
+	void setBought();
+	bool getBought();
+};
+
+#endif /* SQUARE_SQUAREPITFALL_H_ */

@@ -1,0 +1,51 @@
+/*
+ * Player.h
+ *
+ *  Created on: 29 mar 2018
+ *  Author: Vincenzo
+ */
+
+#ifndef PLAYER_PLAYER_H_
+#define PLAYER_PLAYER_H_
+#include <cstring> //put it in game
+#include <iostream>//put it in game
+
+const int max_lengthP = 30; //one unique max_length definition
+extern char* symbols[];
+
+class Player {
+private:
+
+	char name[max_lengthP];
+	int numberPlayer;
+	int position;
+	int sum;
+	char* symbol;
+	bool bankruptcy = false;
+	bool alreadyBought = false;
+
+	void checkBankruptcy();
+
+public:
+
+	Player(char name[],int numPlayer);
+	void setName(char name[]);
+	char* getName();
+	void setPosition(int n);
+	int getPosition();
+	int getNumberPlayer();
+	char* getSymbol();
+	int getSum();
+
+	void printPlayerInfo();
+
+	void increaseSum(int n);
+	void decreaseSum(int n);
+	void movePlayerForward(int steps);  //---> metti in gioco
+	void movePlayerBackward(int steps); //---> metti in gioco
+
+	bool isBankruptcy();
+	void resetAlreadyBought(); //resetta alreadybuy alla fine del turno
+};
+
+#endif /* PLAYER_PLAYER_H_ */
