@@ -24,8 +24,6 @@ private:
 	bool bankruptcy = false;
 	bool alreadyBought = false;
 
-	void checkBankruptcy();
-
 public:
 
 	Player(char name[],int numPlayer);
@@ -35,14 +33,15 @@ public:
 	int getPosition();
 	int getNumberPlayer();
 	char* getSymbol();
+	void setSum(int n);
 	int getSum();
+	void checkBankruptcy();
+
 
 	void printPlayerInfo();
 
-	void increaseSum(int n);
-	void decreaseSum(int n);
-	void movePlayerForward(int steps);  //---> metti in gioco
-	void movePlayerBackward(int steps); //---> metti in gioco
+	void increaseSum(int n);	//-->metti in gioco
+	void decreaseSum(int n);	//-->metti in gioco
 
 	bool isBankruptcy();
 	void resetAlreadyBought(); //resetta alreadybuy alla fine del turno

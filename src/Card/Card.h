@@ -28,7 +28,7 @@ enum cardTypes {
 };
 
 class Card {
-private:
+public:
 	int type;
 
 public:

@@ -50,6 +50,10 @@ char* Player::getSymbol(){
 	return(this->symbol);
 }
 
+void Player::setSum(int n){
+	this->sum = n;
+}
+
 int Player::getPosition(){
 	return (this->position);
 }

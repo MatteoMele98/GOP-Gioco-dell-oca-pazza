@@ -13,7 +13,7 @@ extern int prices[];
 
 
 class SquarePitfall:public Square {
-private:
+public:
 	int cost;
 	bool bought = false;	//already bought by any player?
 public:
