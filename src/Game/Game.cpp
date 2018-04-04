@@ -92,8 +92,12 @@ int Game::rollDice();
 int Game::pickCard();
 
 void Game::executeSquare(Player* player, int typeSquare){
-	switch(typeSquare){
+	switch(typeSquare)
+	case Start:
+		break;
+
 	case Void:
+		break;
 
 	case Pitfall:
 
@@ -102,6 +106,7 @@ void Game::executeSquare(Player* player, int typeSquare){
 			this->buy(player,board[player->getPosition()]);
 
 		//altrimenti non fa niente
+		break;
 
 	case Buy:
 
@@ -117,20 +122,31 @@ void Game::executeSquare(Player* player, int typeSquare){
 		else
 		//se la casella è stata acquistata dallo stesso giocatore --> effetto positivo
 			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
+		break;
 
 	case PickCard:
 
 		//pesca una tipologia di carta e esegue l'effetto corrispondente
 		int cardType = this->pickCard();
 		this->executeEffect(player,cardType); //riordina le carte
+		break;
 
 	case Finish:
-		//non fa nulla nextPlayer() setta isFinish=TRUE e il giocatore vincente in testa
-	}
+		//non fa nulla movePlayerForward() setta isFinish=TRUE e il giocatore vincente in testa
+		break;
+
 }
+
+
 void Game::executeEffect(Player* player, int effect);
 
 void Game::nextPlayer(){
+
+	/*
+	 * si può mettere la stampa del turno corrente qui
+	 *	this->printCurrentTurn(this->currentTurn)
+	 */
+
 	if(this->currentPlayer < this->numPlayers)
 		this->currentPlayer++;
 	else {
@@ -150,6 +166,19 @@ void Game::buy(Player* player, Square* square){
 	 *
 	 * controllo sui soldi prima di comprare
 	 */
+}
+
+void Game::descasePlayerMoney(Player* player, int sum){
+	player->setSum(player->getSum() - sum);
+
+	if(player->getSum() < 0){
+		this->defaultPlayers++;
+		player->setBankruptcy();
+	}
+}
+
+void increasePlayerMoney(Player* player, int sum){
+	player->setSum(player->getSum() + sum);
 }
 
 void Game::movePlayerForward(Player* player,int steps){
@@ -180,6 +209,10 @@ void Game::swapPlayer(Player* first, Player* second){
 	second->setPosition(posTmp);
 }
 
+void Game::checkHeadPlayer(Player* player);
+
+void Game::checkTilePlayer(Player* player);
+
 
 /*
  *
@@ -187,6 +220,11 @@ void Game::swapPlayer(Player* first, Player* second){
  *
  */
 void Game::printWinner(){
-	cout << "Il vincitore è"
+	cout << "Il vincitore è: " << players[this->headPlayer];
 }
+
+void Game::printLooser(){
+
+}
+
 void Game::endMessage();

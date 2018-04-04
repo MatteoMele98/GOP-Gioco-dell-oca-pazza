@@ -35,13 +35,9 @@ public:
 	char* getSymbol();
 	void setSum(int n);
 	int getSum();
-	void checkBankruptcy();
-
+	void setBankruptcy();
 
 	void printPlayerInfo();
-
-	void increaseSum(int n);	//-->metti in gioco
-	void decreaseSum(int n);	//-->metti in gioco
 
 	bool isBankruptcy();
 	void resetAlreadyBought(); //resetta alreadybuy alla fine del turno

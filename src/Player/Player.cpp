@@ -22,12 +22,11 @@ Player::Player(char name[],int numPlayer){
 	this->position = 0; //initial square
 	this->symbol = symbols[numPlayer];
 	this->sum = 10000; //initial sum
-
-	this->checkBankruptcy();
 }
 
-void Player::checkBankruptcy(){
-	if(this->sum<0) this->bankruptcy = true;
+void Player::setBankruptcy(){
+	if(!this->bankruptcy)
+		this->bankruptcy = true;
 }
 
 void Player::setName(char name[]){
@@ -69,27 +68,8 @@ void Player::printPlayerInfo(){
 	cout  << "è in posizone: " << this->position << endl;
 }
 
-void Player::increaseSum(int n){
-	this->sum = this->sum + n;
-}
-
-void Player::decreaseSum(int n){
-	this->sum = this->sum - n;
-	this->checkBankruptcy();
-}
-
 bool Player::isBankruptcy(){
 	return(this->bankruptcy);
-}
-
-void Player::movePlayerForward(int steps){
-	this->position = this->position + steps;
-	//if(this->position > num_squareTOT) this->position = num_squareTOT; //controllo ultima cella
-}
-
-void Player::movePlayerBackward(int steps){
-	this->position = this->position - steps;
-	if(this->position < 0) this->position = 0;	//controllo prima cella
 }
 
 void Player::resetAlreadyBought(){
