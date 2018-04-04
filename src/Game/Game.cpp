@@ -49,7 +49,7 @@ void Game::gameLoop(){		//----> PRINCIPALE
 	//recap situazione del giocatore
 	players[this->currentPlayer]->printPlayerInfo();
 
-	//il giocatore può giocare solo se NON è in bancarotta
+	//il giocatore puÃ² giocare solo se NON Ã¨ in bancarotta
 	if(!players[this->currentPlayer]->isBankruptcy()){
 
 		//tiro dei dadi
@@ -68,7 +68,7 @@ void Game::gameLoop(){		//----> PRINCIPALE
 		this->executeSquare(players[this->currentPlayer], board[players[this->currentPlayer]->getPosition()]->getType());
 	}
 	else
-	//se il giocatore è in bancarotta
+	//se il giocatore Ã¨ in bancarotta
 	cout << players[this->currentPlayer]->getName() << " sei in Bancarotta!" << endl;
 
 	//se tutti i giocatori sono in bancarotta
@@ -101,7 +101,7 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 	case Pitfall:
 
-		//se è libera la si può comprare
+		//se Ã¨ libera la si puÃ² comprare
 		if(!board[player->getPosition()]->getBought())
 			this->buy(player,board[player->getPosition()]);
 
@@ -110,17 +110,17 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 	case Buy:
 
-		//se è libera la si può comprare e si ha accesso all'effetto positivo
+		//se Ã¨ libera la si puÃ² comprare e si ha accesso all'effetto positivo
 		if(!board[player->getPosition()]->getBought()){
 			this->buy(player,board[player->getPosition()]);
 			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
 		}
 
-		//se la casella è gia occupata da un diverso proprietario --> effetto negativo
+		//se la casella Ã¨ gia occupata da un diverso proprietario --> effetto negativo
 		else if(!strcmp(player[this->currentPlayer],board[player->getPosition()]->getOwnership()))
 			this->executeEffect(player,board[player->getPosition()]->getNegativeEffect());
 		else
-		//se la casella è stata acquistata dallo stesso giocatore --> effetto positivo
+		//se la casella Ã¨ stata acquistata dallo stesso giocatore --> effetto positivo
 			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
 		break;
 
@@ -143,7 +143,7 @@ void Game::executeEffect(Player* player, int effect);
 void Game::nextPlayer(){
 
 	/*
-	 * si può mettere la stampa del turno corrente qui
+	 * si puÃ² mettere la stampa del turno corrente qui
 	 *	this->printCurrentTurn(this->currentTurn)
 	 */
 
@@ -158,7 +158,7 @@ void Game::nextPlayer(){
 //=====================================================
 void Game::buy(Player* player, Square* square){
 	/*
-	 * Può essere chiamata da:
+	 * PuÃ² essere chiamata da:
 	 * - Pitfall Square
 	 * - Buy Square
 	 *
@@ -184,6 +184,7 @@ void increasePlayerMoney(Player* player, int sum){
 void Game::movePlayerForward(Player* player,int steps){
 	player->setPosition(player->getPosition() + steps);
 
+	//controllo sul movimento sull'ultima cella
 	if(player->getPosition() >= this->numSquares-1){
 		player->setPosition(this->numSquares-1);
 		this->headPlayer = this->currentPlayer;
@@ -220,7 +221,7 @@ void Game::checkTilePlayer(Player* player);
  *
  */
 void Game::printWinner(){
-	cout << "Il vincitore è: " << players[this->headPlayer];
+	cout << "Il vincitore Ã¨: " << players[this->headPlayer];
 }
 
 void Game::printLooser(){
