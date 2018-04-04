@@ -191,7 +191,7 @@ void Game::movePlayerForward(Player* player,int steps){
 		this->isFinish = true;
 	}
 
-	//checkHeadPlayer(player);
+	this->checkHeadPlayer(player);
 }
 
 void Game::movePlayerBackward(Player* player,int steps){
@@ -200,7 +200,7 @@ void Game::movePlayerBackward(Player* player,int steps){
 	if(player->getPosition() > this->numSquares)
 		player->setPosition(this->numSquares-1);
 
-	//checkHeadPlayer(player)
+	this->checkHeadPlayer(player)
 }
 
 
