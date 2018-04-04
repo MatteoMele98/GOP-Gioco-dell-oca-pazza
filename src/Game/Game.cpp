@@ -49,7 +49,7 @@ void Game::gameLoop(){		//----> PRINCIPALE
 	//recap situazione del giocatore
 	players[this->currentPlayer]->printPlayerInfo();
 
-	//il giocatore puÃ² giocare solo se NON Ã¨ in bancarotta
+	//il giocatore può giocare solo se NON Ã¨ in bancarotta
 	if(!players[this->currentPlayer]->isBankruptcy()){
 
 		//tiro dei dadi
@@ -68,7 +68,7 @@ void Game::gameLoop(){		//----> PRINCIPALE
 		this->executeSquare(players[this->currentPlayer], board[players[this->currentPlayer]->getPosition()]->getType());
 	}
 	else
-	//se il giocatore Ã¨ in bancarotta
+	//se il giocatore è in bancarotta
 	cout << players[this->currentPlayer]->getName() << " sei in Bancarotta!" << endl;
 
 	//se tutti i giocatori sono in bancarotta
@@ -143,7 +143,7 @@ void Game::executeEffect(Player* player, int effect);
 void Game::nextPlayer(){
 
 	/*
-	 * si puÃ² mettere la stampa del turno corrente qui
+	 * si può mettere la stampa del turno corrente qui
 	 *	this->printCurrentTurn(this->currentTurn)
 	 */
 
@@ -158,7 +158,7 @@ void Game::nextPlayer(){
 //=====================================================
 void Game::buy(Player* player, Square* square){
 	/*
-	 * PuÃ² essere chiamata da:
+	 * Può essere chiamata da:
 	 * - Pitfall Square
 	 * - Buy Square
 	 *
@@ -200,7 +200,7 @@ void Game::movePlayerBackward(Player* player,int steps){
 	if(player->getPosition() > this->numSquares)
 		player->setPosition(this->numSquares-1);
 
-	this->checkHeadPlayer(player)
+	this->checkHeadPlayer(player);
 }
 
 
