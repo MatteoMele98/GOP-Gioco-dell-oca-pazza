@@ -178,20 +178,6 @@ int main(){
 		cout << p.getSymbol() << endl;
 		p.printPlayerInfo();
 
-		p.decreaseSum(5000);
-		p.printPlayerInfo();
-
-		p.decreaseSum(2500);
-		p.printPlayerInfo();
-
-		p.decreaseSum(2501);
-		p.printPlayerInfo();
-
-		p.movePlayerBackward(5);
-		p.printPlayerInfo(); 	//movimento prima della prima cella OK
-
-		p.movePlayerForward(5);
-		p.printPlayerInfo();
 
 
 

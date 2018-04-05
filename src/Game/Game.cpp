@@ -4,7 +4,7 @@
  *  Created on: 03 apr 2018
  *      Author: Matteo
  */
-
+/*
 #include <iostream>
 #include "Game.h"
 
@@ -32,7 +32,7 @@ Game::Game() {
  *
  * INIZIALIZZAZIONE
  *
- */
+ *//*
 void Game::startMessage();
 void Game::printRules();
 void Game::initBoard();
@@ -43,7 +43,7 @@ void Game::initPlayers();
  *
  * GAME LOOP
  *
- */
+ *//*
 void Game::gameLoop(){		//----> PRINCIPALE
 
 	//recap situazione del giocatore
@@ -146,7 +146,7 @@ void Game::nextPlayer(){
 	 * si può mettere la stampa del turno corrente qui
 	 *	this->printCurrentTurn(this->currentTurn)
 	 */
-
+/*
 	if(this->currentPlayer < this->numPlayers)
 		this->currentPlayer++;
 	else {
@@ -167,7 +167,7 @@ void Game::buy(Player* player, Square* square){
 	 * controllo sui soldi prima di comprare
 	 */
 }
-
+/*
 void Game::descasePlayerMoney(Player* player, int sum){
 	player->setSum(player->getSum() - sum);
 
@@ -219,7 +219,7 @@ void Game::checkTilePlayer(Player* player);
  *
  * FINE
  *
- */
+ *//*
 void Game::printWinner(){
 	cout << "Il vincitore Ã¨: " << players[this->headPlayer];
 }
@@ -229,3 +229,5 @@ void Game::printLooser(){
 }
 
 void Game::endMessage();
+
+*/
