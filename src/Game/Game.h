@@ -13,8 +13,11 @@
 
 #include "../Square/Square.h"
 #include "../Player/Player.h"
+#include "../AuxiliaryFunctions.h"
+
 //#include "../Deck/Deck.h"
 
+extern int sum[];
 using namespace std;
 
 enum effect {
@@ -27,10 +30,9 @@ enum effect {
 	loseMoney,	//3
 
 	//effect for cards
-	/*
-	 *
-	 *
-	 */
+	pickQuestion,
+	swapHead,
+	swapTile
 };
 
 class Game {

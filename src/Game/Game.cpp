@@ -82,7 +82,17 @@ void Game::gameLoop(){		//----> PRINCIPALE
 }
 
 //====================================================
-void Game::printCurrentTurn(int Nturn);
+void Game::printCurrentTurn(int Nturn){
+	/*
+	 *
+	 * ****************************************************************
+	 *
+	 *						TURNO Nturn
+	 *
+	 * ****************************************************************
+	 *
+	 */
+}
 
 void Game::printBoard(){
 	/*
@@ -143,7 +153,42 @@ void Game::executeSquare(Player* player, int typeSquare){
 }
 
 
-void Game::executeEffect(Player* player, int effect);
+void Game::executeEffect(Player* player, int effect){
+	switch(effect)
+	case moveForward:
+		this->movePlayerForward(player,randomBetween(1,6));
+		break;
+
+	case addMoney:
+		this->increasePlayerMoney(player,sum[randomBetween(0,5)]);
+		break;
+
+	case moveBackward:
+		this->movePlayerBackward(player,randomBetween(1,6));
+		break;
+
+	case loseMoney:
+		this->descasePlayerMoney(player,sum[randomBetween(0,5)]);
+		break;
+
+	case pickQuestion:
+		/*
+		 * if(this->answerQuestion())
+		 * 		this->movePlayerForward(player,randomBetween(1,6));
+		 * else
+		 * 		this->movePlayerBackward(player,randomBetween(1,6));
+		 *
+		 */
+		break;
+
+	case swapHead:
+		this->swapPlayer(player,players[this->headPlayer]);
+		break;
+
+	case swapTile:
+		this->swapPlayer(players[this->tilePlayer],player);
+		break;
+}
 
 void Game::nextPlayer(){
 
