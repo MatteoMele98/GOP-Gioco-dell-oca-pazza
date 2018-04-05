@@ -96,10 +96,10 @@ public:
 	//scambia la posizione di first con second --> implementa swapHead e swapTile
 	void swapPlayer(Player* first, Player* second);
 
-	//controlla se player corrente è in testa
+	//controlla se player corrente è in testa, eventualmente la setta
 	void checkHeadPlayer(Player* player);
 
-	//controlla se player corrente è in coda
+	//controlla se player corrente è in coda, eventualmente la setta
 	void checkTilePlayer(Player* player);
 
 };
