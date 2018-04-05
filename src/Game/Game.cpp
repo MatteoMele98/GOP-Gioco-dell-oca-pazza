@@ -10,7 +10,7 @@
 
 
 Game::Game() {
-	this->numPlayers = 0;
+	//this->numPlayers = 0;
 	this->startMessage();
 	this->printRules();
 	this->initBoard();
@@ -49,7 +49,7 @@ void Game::gameLoop(){		//----> PRINCIPALE
 	//recap situazione del giocatore
 	players[this->currentPlayer]->printPlayerInfo();
 
-	//il giocatore può giocare solo se NON Ã¨ in bancarotta
+	//il giocatore può giocare solo se NON è in bancarotta
 	if(!players[this->currentPlayer]->isBankruptcy()){
 
 		//tiro dei dadi
@@ -101,7 +101,7 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 	case Pitfall:
 
-		//se Ã¨ libera la si puÃ² comprare
+		//se è libera la si puÃ² comprare
 		if(!board[player->getPosition()]->getBought())
 			this->buy(player,board[player->getPosition()]);
 
@@ -110,7 +110,7 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 	case Buy:
 
-		//se Ã¨ libera la si puÃ² comprare e si ha accesso all'effetto positivo
+		//se è libera la si puÃ² comprare e si ha accesso all'effetto positivo
 		if(!board[player->getPosition()]->getBought()){
 			this->buy(player,board[player->getPosition()]);
 			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
@@ -195,12 +195,12 @@ void Game::movePlayerForward(Player* player,int steps){
 }
 
 void Game::movePlayerBackward(Player* player,int steps){
-	player->setPosition(player->getPosition() + steps);
+	player->setPosition(player->getPosition() - steps);
 
-	if(player->getPosition() > this->numSquares)
-		player->setPosition(this->numSquares-1);
+	if(player->getPosition() <= 0)
+		player->setPosition(0);
 
-	this->checkHeadPlayer(player);
+	this->checkTilePlayer(player);
 }
 
 
