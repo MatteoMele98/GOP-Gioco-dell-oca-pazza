@@ -97,16 +97,16 @@ void Game::printCurrentTurn(){
 	 *
 	 */
 
-	for(int i=0; i<150; i++)
+	for(int i=0; i<100; i++)
 		cout << "*";
 		cout << endl << endl;
 
-	for(int i=0; i<3;i++)
+	for(int i=0; i<5;i++)
 		cout << '\t';
 
-	cout << "TUNRO " << this->currentTurn << endl << endl;
+	cout << "TURNO " << this->currentTurn << endl << endl;
 
-	for(int i=0; i<150; i++)
+	for(int i=0; i<100; i++)
 			cout << "*";
 
 }
