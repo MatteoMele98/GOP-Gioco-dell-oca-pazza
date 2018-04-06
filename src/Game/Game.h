@@ -62,7 +62,7 @@ private:
 
 	//game loop
 	void gameLoop();
-	void printCurrentTurn(int Nturn);
+	void printCurrentTurn();
 	void printBoard();
 
 	int rollDice();

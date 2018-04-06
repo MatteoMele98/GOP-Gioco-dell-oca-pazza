@@ -44,7 +44,11 @@ void Game::initPlayers();
  * GAME LOOP
  *
  */
-void Game::gameLoop(){		//----> PRINCIPALE
+void Game::gameLoop(){
+
+	//stampa del primo turno
+	if(this->currentTurn == 1)
+		this->printCurrentTurn();
 
 	//recap situazione del giocatore
 	players[this->currentPlayer]->printPlayerInfo();
@@ -82,16 +86,29 @@ void Game::gameLoop(){		//----> PRINCIPALE
 }
 
 //====================================================
-void Game::printCurrentTurn(int Nturn){
+void Game::printCurrentTurn(){
 	/*
 	 *
 	 * ****************************************************************
 	 *
-	 *						TURNO Nturn
+	 *						TURNO this->currentTurn
 	 *
 	 * ****************************************************************
 	 *
 	 */
+
+	for(int i=0; i<150; i++)
+		cout << "*";
+		cout << endl << endl;
+
+	for(int i=0; i<3;i++)
+		cout << '\t';
+
+	cout << "TUNRO " << this->currentTurn << endl << endl;
+
+	for(int i=0; i<150; i++)
+			cout << "*";
+
 }
 
 void Game::printBoard(){
@@ -192,9 +209,6 @@ void Game::executeEffect(Player* player, int effect){
 
 void Game::nextPlayer(){
 
-	if(this->currentTurn == 1)
-		this->printCurrentTurn(this->currentTurn);
-
 	if(this->currentPlayer < this->numPlayers)
 		this->currentPlayer++;
 	else {
@@ -202,7 +216,7 @@ void Game::nextPlayer(){
 		this->currentTurn++;
 
 		//stampa il turno alla fine del ciclo dei giocatori
-		this->printCurrentTurn(this->currentTurn);
+		this->printCurrentTurn();
 	}
 }
 
