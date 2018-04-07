@@ -9,7 +9,7 @@
 
 Square::Square() {
 	this->type = Void;
-	char initialMessage[] = "VOUTA";
+	char initialMessage[] = "VUOTA";
 	strcpy(this->message, initialMessage);
 }
 

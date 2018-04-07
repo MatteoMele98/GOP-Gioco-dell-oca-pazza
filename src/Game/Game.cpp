@@ -4,13 +4,12 @@
  *  Created on: 03 apr 2018
  *      Author: Matteo
  */
-/*
+
 #include <iostream>
 #include "Game.h"
 
 
 Game::Game() {
-	//this->numPlayers = 0;
 	this->startMessage();
 	this->printRules();
 	this->initBoard();
@@ -32,7 +31,8 @@ Game::Game() {
  *
  * INIZIALIZZAZIONE
  *
- *//*
+ */
+
 void Game::startMessage();
 void Game::printRules();
 void Game::initBoard();
@@ -43,8 +43,12 @@ void Game::initPlayers();
  *
  * GAME LOOP
  *
- *//*
-void Game::gameLoop(){		//----> PRINCIPALE
+ */
+void Game::gameLoop(){
+
+	//stampa del primo turno
+	if(this->currentTurn == 1)
+		this->printCurrentTurn();
 
 	//recap situazione del giocatore
 	players[this->currentPlayer]->printPlayerInfo();
@@ -82,9 +86,37 @@ void Game::gameLoop(){		//----> PRINCIPALE
 }
 
 //====================================================
-void Game::printCurrentTurn(int Nturn);
+void Game::printCurrentTurn(){
+	/*
+	 *
+	 * ****************************************************************
+	 *
+	 *						TURNO this->currentTurn
+	 *
+	 * ****************************************************************
+	 *
+	 */
 
-void Game::printBoard();
+	for(int i=0; i<100; i++)
+		cout << "*";
+		cout << endl << endl;
+
+	for(int i=0; i<5;i++)
+		cout << '\t';
+
+	cout << "TURNO " << this->currentTurn << endl << endl;
+
+	for(int i=0; i<100; i++)
+			cout << "*";
+
+}
+
+void Game::printBoard(){
+	/*
+	 * per ogni casella viene stampato numero e messsaggio associato
+	 *
+	 */
+}
 
 int Game::rollDice();
 
@@ -101,7 +133,7 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 	case Pitfall:
 
-		//se è libera la si puÃ² comprare
+		//se è libera la si può comprare
 		if(!board[player->getPosition()]->getBought())
 			this->buy(player,board[player->getPosition()]);
 
@@ -110,17 +142,17 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 	case Buy:
 
-		//se è libera la si puÃ² comprare e si ha accesso all'effetto positivo
+		//se è libera la si può comprare e si ha accesso all'effetto positivo
 		if(!board[player->getPosition()]->getBought()){
 			this->buy(player,board[player->getPosition()]);
 			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
 		}
 
-		//se la casella Ã¨ gia occupata da un diverso proprietario --> effetto negativo
+		//se la casella è gia occupata da un diverso proprietario --> effetto negativo
 		else if(!strcmp(player[this->currentPlayer],board[player->getPosition()]->getOwnership()))
 			this->executeEffect(player,board[player->getPosition()]->getNegativeEffect());
 		else
-		//se la casella Ã¨ stata acquistata dallo stesso giocatore --> effetto positivo
+		//se la casella è stata acquistata dallo stesso giocatore --> effetto positivo
 			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
 		break;
 
@@ -138,20 +170,53 @@ void Game::executeSquare(Player* player, int typeSquare){
 }
 
 
-void Game::executeEffect(Player* player, int effect);
+void Game::executeEffect(Player* player, int effect){
+	switch(effect)
+	case moveForward:
+		this->movePlayerForward(player,randomBetween(1,6));
+		break;
+
+	case addMoney:
+		this->increasePlayerMoney(player,sum[randomBetween(0,5)]);
+		break;
+
+	case moveBackward:
+		this->movePlayerBackward(player,randomBetween(1,6));
+		break;
+
+	case loseMoney:
+		this->descasePlayerMoney(player,sum[randomBetween(0,5)]);
+		break;
+
+	case pickQuestion:
+		/*
+		 * if(this->answerQuestion())
+		 * 		this->movePlayerForward(player,randomBetween(1,6));
+		 * else
+		 * 		this->movePlayerBackward(player,randomBetween(1,6));
+		 *
+		 */
+		break;
+
+	case swapHead:
+		this->swapPlayer(player,players[this->headPlayer]);
+		break;
+
+	case swapTile:
+		this->swapPlayer(players[this->tilePlayer],player);
+		break;
+}
 
 void Game::nextPlayer(){
 
-	/*
-	 * si può mettere la stampa del turno corrente qui
-	 *	this->printCurrentTurn(this->currentTurn)
-	 */
-/*
 	if(this->currentPlayer < this->numPlayers)
 		this->currentPlayer++;
 	else {
 		this->currentPlayer = 0;
 		this->currentTurn++;
+
+		//stampa il turno alla fine del ciclo dei giocatori
+		this->printCurrentTurn();
 	}
 }
 
@@ -165,9 +230,13 @@ void Game::buy(Player* player, Square* square){
 	 * distingui i casi
 	 *
 	 * controllo sui soldi prima di comprare
+	 * incova getBought()
+	 * setta il nuovo messaggio della casella:
+	 * - Trappola
+	 * - proprietà di player->getName()
 	 */
 }
-/*
+
 void Game::descasePlayerMoney(Player* player, int sum){
 	player->setSum(player->getSum() - sum);
 
@@ -189,14 +258,15 @@ void Game::movePlayerForward(Player* player,int steps){
 		player->setPosition(this->numSquares-1);
 		this->headPlayer = this->currentPlayer;
 		this->isFinish = true;
-	}
-
-	this->checkHeadPlayer(player);
+	} else
+		//se il giocatore non è arrivato alla fine controllo se è in testa
+		this->checkHeadPlayer(player);
 }
 
 void Game::movePlayerBackward(Player* player,int steps){
 	player->setPosition(player->getPosition() - steps);
 
+	//controllo sul movimento sulla prima cella
 	if(player->getPosition() <= 0)
 		player->setPosition(0);
 
@@ -219,9 +289,9 @@ void Game::checkTilePlayer(Player* player);
  *
  * FINE
  *
- *//*
+ */
 void Game::printWinner(){
-	cout << "Il vincitore Ã¨: " << players[this->headPlayer];
+	cout << "Il vincitore è: " << players[this->headPlayer];
 }
 
 void Game::printLooser(){
@@ -230,4 +300,4 @@ void Game::printLooser(){
 
 void Game::endMessage();
 
-*/
+

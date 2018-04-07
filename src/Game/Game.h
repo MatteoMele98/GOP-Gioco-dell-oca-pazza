@@ -13,8 +13,11 @@
 
 #include "../Square/Square.h"
 #include "../Player/Player.h"
+#include "../AuxiliaryFunctions.h"
+
 //#include "../Deck/Deck.h"
 
+extern int sum[];
 using namespace std;
 
 enum effect {
@@ -27,10 +30,9 @@ enum effect {
 	loseMoney,	//3
 
 	//effect for cards
-	/*
-	 *
-	 *
-	 */
+	pickQuestion,
+	swapHead,
+	swapTile
 };
 
 class Game {
@@ -60,7 +62,7 @@ private:
 
 	//game loop
 	void gameLoop();
-	void printCurrentTurn(int Nturn);
+	void printCurrentTurn();
 	void printBoard();
 
 	int rollDice();
@@ -96,10 +98,10 @@ public:
 	//scambia la posizione di first con second --> implementa swapHead e swapTile
 	void swapPlayer(Player* first, Player* second);
 
-	//controlla se player corrente è in testa
+	//controlla se player corrente è in testa, eventualmente la setta
 	void checkHeadPlayer(Player* player);
 
-	//controlla se player corrente è in coda
+	//controlla se player corrente è in coda, eventualmente la setta
 	void checkTilePlayer(Player* player);
 
 };
