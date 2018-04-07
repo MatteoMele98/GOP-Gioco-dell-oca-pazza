@@ -1,4 +1,4 @@
-//============================================================================
+﻿//============================================================================
 // Name        : GOP.cpp
 // Author      : 
 // Version     :
@@ -30,6 +30,7 @@
 #include "Card/CardSwapHead.h"
 #include "Card/CardSwapTile.h"
 
+#include "Deck/Deck.h"
 
 using namespace std;
 
@@ -162,7 +163,10 @@ int main(){
 		CardPickQuestion a7;
 		cout << a7.getMessage() << endl;
 		cout << a7.getType() << endl; //6
-
+		
+		Deck li;
+		Card* ni=li.createCard();
+		cout<<endl<<"Il messaggio della carta è: "<<ni->getMessage()<<" Il suo tipo è: "<<ni->getType();
 
 		cout << "************** TEST PLAYER *********************" << endl << endl <<endl;
 
