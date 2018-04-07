@@ -8,8 +8,8 @@
 #include "Square.h"
 
 Square::Square() {
-	this->type = Void;
-	char initialMessage[] = "VUOTA";
+	this->type = -1;
+	char initialMessage[] = "default";
 	strcpy(this->message, initialMessage);
 }
 

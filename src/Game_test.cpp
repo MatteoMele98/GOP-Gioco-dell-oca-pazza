@@ -13,6 +13,7 @@
 
 #include "Square/Square.h"
 #include "Square/Square.h"
+#include "Square/SquareVoid.h"
 #include "Square/SquareStart.h"
 #include "Square/SquarePitfall.h"
 #include "Square/SquareBuy.h"
@@ -49,7 +50,7 @@ int main(){
 
 
 	cout << "================= void square test ===========================" << endl;
-		Square c1;
+		SquareVoid c1;
 
 		cout << c1.getType() << endl;
 		cout << c1.getMessage() << endl;
