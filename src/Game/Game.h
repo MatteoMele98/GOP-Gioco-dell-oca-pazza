@@ -13,6 +13,7 @@
 
 #include "../Square/Square.h"
 #include "../Player/Player.h"
+#include "../Deck/Deck.h"
 #include "../AuxiliaryFunctions.h"
 
 //#include "../Deck/Deck.h"
@@ -22,15 +23,15 @@ using namespace std;
 
 enum effect {
 	//positive effect for Squares and Cards
-	moveForward, 	//0
-	addMoney,   //1
+	moveForward,		//0
+	addMoney,   		//1
 
 	//negative effect for Squares and Cards
-	moveBackward,	//2
-	loseMoney,	//3
+	moveBackward,		//2
+	loseMoney,			//3
 
 	//effect for cards
-	pickQuestion,
+	pickQuestion, 		//4
 	swapHead,
 	swapTile
 };
@@ -39,7 +40,7 @@ class Game {
 private:
 	Player* players[4];
 	Square* board[100];
-	//Deck* deck;
+	Deck* deck;
 
 	bool isFinish = false;
 
@@ -77,11 +78,8 @@ private:
 	void endMessage();
 
 	//auxiliary
-	//controlla se player corrente è in testa, eventualmente la setta
-	void checkHeadPlayer(Player* player);
-
-	//controlla se player corrente è in coda, eventualmente la setta
-	void checkTilePlayer(Player* player);
+	//setta il giocatore in testa e quello in coda
+	void checkHeadTilePlayer();
 
 public:
 	Game();
