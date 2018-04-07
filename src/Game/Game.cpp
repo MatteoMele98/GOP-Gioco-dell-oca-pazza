@@ -4,12 +4,14 @@
  *  Created on: 03 apr 2018
  *      Author: Matteo
  */
-
+/*
 #include <iostream>
 #include "Game.h"
 
 
 Game::Game() {
+	//srand(time(0));
+
 	this->startMessage();
 	this->printRules();
 	this->initBoard();
@@ -32,7 +34,7 @@ Game::Game() {
  * INIZIALIZZAZIONE
  *
  */
-
+/*
 void Game::startMessage();
 void Game::printRules();
 void Game::initBoard();
@@ -43,7 +45,7 @@ void Game::initPlayers();
  *
  * GAME LOOP
  *
- */
+ *//*
 void Game::gameLoop(){
 
 	//stampa del primo turno
@@ -96,7 +98,7 @@ void Game::printCurrentTurn(){
 	 * ****************************************************************
 	 *
 	 */
-
+/*
 	for(int i=0; i<100; i++)
 		cout << "*";
 		cout << endl << endl;
@@ -117,7 +119,7 @@ void Game::printBoard(){
 	 *
 	 */
 }
-
+/*
 int Game::rollDice();
 
 
@@ -195,7 +197,7 @@ void Game::executeEffect(Player* player, int effect){
 		 * else
 		 * 		this->movePlayerBackward(player,randomBetween(1,6));
 		 *
-		 */
+		 *//*
 		break;
 
 	case swapHead:
@@ -234,7 +236,7 @@ void Game::buy(Player* player, Square* square){
 	 * setta il nuovo messaggio della casella:
 	 * - Trappola
 	 * - proprietà di player->getName()
-	 */
+	 *//*
 }
 
 void Game::descasePlayerMoney(Player* player, int sum){
@@ -280,7 +282,10 @@ void Game::swapPlayer(Player* first, Player* second){
 	second->setPosition(posTmp);
 }
 
-void Game::checkHeadPlayer(Player* player);
+void Game::checkHeadPlayer(Player* player){
+	if(player->getPosition() >= this->players[this->headPlayer]->getPosition())
+		this->
+}
 
 void Game::checkTilePlayer(Player* player);
 
@@ -289,7 +294,7 @@ void Game::checkTilePlayer(Player* player);
  *
  * FINE
  *
- */
+ *//*
 void Game::printWinner(){
 	cout << "Il vincitore è: " << players[this->headPlayer];
 }

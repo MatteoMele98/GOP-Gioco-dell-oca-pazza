@@ -38,6 +38,7 @@ using namespace std;
 
 
 int main(){
+	srand(time(0)); //------------> metti in gioco!
 
 	cout << "************** TEST SQUARE *********************" << endl << endl <<endl;
 

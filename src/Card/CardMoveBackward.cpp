@@ -14,9 +14,9 @@ CardMoveBackward::CardMoveBackward() {
 
 	//compone il messaggio con il nuovo valore
 	if(this->value == 1)
-			sprintf(newMessage,"Vai avanti di %d passo!",this->value);
+			sprintf(newMessage,"Vai indietro di %d passo!",this->value);
 		else
-			sprintf(newMessage,"Vai avanti di %d passi!",this->value);
+			sprintf(newMessage,"Vai indietro di %d passi!",this->value);
 
 	strcpy(this->message,newMessage);
 }
