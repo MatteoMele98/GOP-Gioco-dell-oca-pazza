@@ -23,7 +23,7 @@ using namespace std;
 
 enum effect {
 	//positive effect for Squares and Cards
-	moveForward,		//0
+	oveForward,		//0
 	addMoney,   		//1
 
 	//negative effect for Squares and Cards
@@ -50,7 +50,9 @@ private:
 
 	int numSquares = 0;
 
-	int currentPlayer = 0;
+	int indexCurrentPlayer = 0;
+	Player* currentPlayer = players[this->indexCurrentPlayer];
+	Square* currentSquare = board[this->currentPlayer->getPosition()];
 	int currentTurn = 1; //indica il turno corrente
 	int headPlayer = 0;	//numero (nell'array) del giocatore in testa   0-3 <----- il vincitore è qui
 	int tilePlayer = 0; //numero (nell'array) del giocatore in coda    0-3
@@ -84,23 +86,28 @@ private:
 public:
 	Game();
 
-	//decrementa i soldi di player, controlla la bancarotta
-	void descasePlayerMoney(Player* player, int sum);
+	//decrementa i soldi del player corrente, controlla la bancarotta
+	void decreasePlayerMoney(int sum);
 
-	//incrementa i soldi di player
-	void increasePlayerMoney(Player* player, int sum);
+	//incrementa i soldi di player corrente
+	void increasePlayerMoney(int sum);
 
-	//compra casella
-	void buy(Player* player, Square* square);
+	//compra la casella su cui currentPlayer è settato (board[players[currentPlayer]->getPosition()))
+	void buy();
 
  	//controllo ultima cella
-	void movePlayerForward(Player* player,int steps);
+	void movePlayerForward(int steps);
 
 	//controllo prima cella
-	void movePlayerBackward(Player* player,int steps);
+	void movePlayerBackward(int steps);
 
 	//scambia la posizione di first con second --> implementa swapHead e swapTile
-	void swapPlayer(Player* first, Player* second);
+	void swapPlayerHead();
+	void swapPlayerTile();
+
+
+	//Stabilisce se il giocatore corrente è il propritario della casella in cui si trova
+	bool checkOwnership();
 
 
 

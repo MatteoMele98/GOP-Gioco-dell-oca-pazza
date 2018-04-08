@@ -11,10 +11,11 @@
 #include <cstring> //put it in game
 #include <iostream>//put it in game
 
+#include "../Game/Game.h"
 #include "../AuxiliaryFunctions.h"
 
 
-const int max_length = 100;
+const int max_lengthS = 100;
 
 enum SquareTypes{
 	Void,		//=0
@@ -29,13 +30,17 @@ enum SquareTypes{
 class Square {
 protected:
 	int type;
-	char message[max_length];
+	char message[max_lengthS];
+	//virtual ~Square(){}; //virtual destructor
+
 public:
 	Square();
 	void setType(int t);
 	int getType();
 	void setMessage(char message[]);
 	char* getMessage();
+
+	//void virtual executeSquare(Game* game){};
 };
 
 #endif /* SQUARE_SQUARE_H_ */

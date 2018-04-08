@@ -22,9 +22,13 @@ int Square::getType(){
 }
 
 void Square::setMessage(char message[]){
-	strncpy(this->message,message,max_length-1);
+	strncpy(this->message,message,max_lengthS-1);
 }
 
 char* Square::getMessage(){
 	return this->message;
 }
+
+//void Square::executeSquare(Game* game){
+//	//richiama la corrispondente funzione in gioco a seconda del tipo di casella
+//}

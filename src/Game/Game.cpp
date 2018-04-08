@@ -54,17 +54,17 @@ void Game::gameLoop(){
 		this->printCurrentTurn();
 
 	//recap situazione del giocatore
-	players[this->currentPlayer]->printPlayerInfo();
+	this->currentPlayer->printPlayerInfo();
 
 	//il giocatore può giocare solo se NON è in bancarotta
-	if(!players[this->currentPlayer]->isBankruptcy()){
+	if(!this->currentPlayer->isBankruptcy()){
 
 		//tiro dei dadi
 		int steps = this->rollDice();
 		//hai fatto x  ---------------------> messsaggio qui o in rollDice()
 
 		//movimento nella casella corrispondente
-		this->movePlayerForward(players[this->currentPlayer],steps);
+		this->movePlayerForward(steps);
 
 		//stampa del tabellone aggioranto
 		this->printBoard();
@@ -72,11 +72,11 @@ void Game::gameLoop(){
 		//sei nella casella x di tipo ------
 
 		//esecuzione della casella in base al tipo
-		this->executeSquare(players[this->currentPlayer], board[players[this->currentPlayer]->getPosition()]->getType());
+		this->executeSquare(this->currentPlayer, this->currentSquare->getType());
 	}
 	else
 	//se il giocatore è in bancarotta
-	cout << players[this->currentPlayer]->getName() << " sei in Bancarotta!" << endl;
+	cout << this->currentPlayer->getName() << " sei in Bancarotta!" << endl;
 
 	//se tutti i giocatori sono in bancarotta
 	if(this->defaultPlayers == this->numPlayers){
@@ -93,7 +93,6 @@ void Game::printCurrentTurn(){
 	/*
 	 *
 	 * ****************************************************************
-	 *
 	 *						TURNO this->currentTurn
 	 *
 	 * ****************************************************************
@@ -102,7 +101,7 @@ void Game::printCurrentTurn(){
 
 	for(int i=0; i<100; i++)
 		cout << "*";
-		cout << endl << endl;
+		cout << endl;
 
 	for(int i=0; i<5;i++)
 		cout << '\t';
@@ -175,23 +174,23 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 void Game::executeEffect(Player* player, int effect){
 	switch(effect)
-	case moveForward:
-		this->movePlayerForward(player,randomBetween(1,6));
+	case effect::moveForward:
+		this->movePlayerForward(randomBetween(1,6));
 		break;
 
-	case addMoney:
-		this->increasePlayerMoney(player,sum[randomBetween(0,5)]);
+	case effect::addMoney:
+		this->increasePlayerMoney(sum[randomBetween(0,5)]);
 		break;
 
-	case moveBackward:
-		this->movePlayerBackward(player,randomBetween(1,6));
+	case effect::moveBackward:
+		this->movePlayerBackward(randomBetween(1,6));
 		break;
 
-	case loseMoney:
-		this->descasePlayerMoney(player,sum[randomBetween(0,5)]);
+	case effect::loseMoney:
+		this->decreasePlayerMoney(sum[randomBetween(0,5)]);
 		break;
 
-	case pickQuestion:
+	case effect::pickQuestion:
 		/*
 		 * if(this->answerQuestion())
 		 * 		this->movePlayerForward(player,randomBetween(1,6));
@@ -201,31 +200,32 @@ void Game::executeEffect(Player* player, int effect){
 		 */
 		break;
 
-	case swapHead:
-		this->swapPlayer(player,players[this->headPlayer]);
+	case effect::swapHead:
+		this->swapPlayerHead();
 		break;
 
-	case swapTile:
-		this->swapPlayer(players[this->tilePlayer],player);
+	case effect::swapTile:
+		this->swapPlayerTile();
 		break;
 }
 
 void Game::nextPlayer(){
 
-	if(this->currentPlayer < this->numPlayers)
-		this->currentPlayer++;
-	else {
-		this->currentPlayer = 0;
+	if(this->indexCurrentPlayer == this->numPlayers-1){
+		this->indexCurrentPlayer = 0;
 		this->currentTurn++;
 
 		//stampa il turno alla fine del ciclo dei giocatori
 		this->printCurrentTurn();
-	}
+	} else
+		this->indexCurrentPlayer++;
 }
 
 //=====================================================
-void Game::buy(Player* player, Square* square){
+void Game::buy(){
 	/*
+	 * lavoro sempre con player[this->currentPlayer]
+	 *
 	 * Può essere chiamata da:
 	 * - Pitfall Square
 	 * - Buy Square
@@ -237,50 +237,102 @@ void Game::buy(Player* player, Square* square){
 	 * setta il nuovo messaggio della casella:
 	 * - Trappola
 	 * - proprietà di player->getName()
+	 *
+	 *
+	 * ???? far uscire "Non hai soldi" prima di aver provato a comprare o subito?
 	 */
+
+	int typeSquare = this->currentSquare->getType();
+	if(this->currentPlayer->getSum() >= this->currentSquare->getCost() ){
+		char ans;
+		cout << "La casella numero " << this->currentPlayer->getPosition()+1 << "costa: " << this->currentSquare->getCost() << "$" << '\n';
+
+		do {
+			cout << "Vuoi acquistarla? [s/n]" << endl;
+			cin >> ans;
+			cin.ignore(100,'\n');
+		} while (ans != 's' || ans != 'S' || ans != 'n' || ans != 'N');
+
+		//acquisto della casella
+		if(ans != 's' || ans != 'S'){
+			char newMessage[];
+
+			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
+			this->currentSquare->setBought();
+			//diminuisco la somma del giocatore
+			this->decreasePlayerMoney(this->currentSquare->getCost());
+
+			cout << endl << "Casella acquistata!" << endl;
+
+			//casella di tipo trappola
+			if(typeSquare == Pitfall){
+				cout << "...CASELLA TRAPPOLA!" << endl;
+				 sprintf(newMessage,"%s", "TRAPPOLA");
+			}
+
+			//casella di tipo compra
+			else if (typeSquare == Buy){
+				cout << "Ora sei il proprietario di questa casella!" << endl;
+				sprintf(newMessage,"Proprietà di %s",this->currentPlayer->getName());
+			}
+
+			//setto il nuovo messaggio per la stampa del tabellone
+			this->currentSquare->setMessage(newMessage);
+		} else {
+			//il giocatore non vuole acquistare la casella
+			cout << "Casella non acquistata." << endl;
+		}
+
+	} else
+		cout << this->currentPlayer->getName() << ",non hai abbasta soldi per comprare questa casella!" << endl;
 }
 
-void Game::descasePlayerMoney(Player* player, int sum){
-	player->setSum(player->getSum() - sum);
+void Game::decreasePlayerMoney(int sum){
+	this->currentPlayer->setSum(this->currentPlayer->getSum() - sum);
 
-	if(player->getSum() < 0){
+	if(this->currentPlayer->getSum() < 0){
 		this->defaultPlayers++;
-		player->setBankruptcy();
+		this->currentPlayer->setBankruptcy();
 	}
 }
 
-void increasePlayerMoney(Player* player, int sum){
-	player->setSum(player->getSum() + sum);
+void Game::increasePlayerMoney(int sum){
+	this->currentPlayer->setSum(this->currentPlayer->getSum() + sum);
 }
 
-void Game::movePlayerForward(Player* player,int steps){
-	player->setPosition(player->getPosition() + steps);
+void Game::movePlayerForward(int steps){
+	this->currentPlayer->setPosition(this->currentPlayer->getPosition() + steps);
 
 	//controllo sul movimento sull'ultima cella
-	if(player->getPosition() >= this->numSquares-1){
-		player->setPosition(this->numSquares-1);
-		this->headPlayer = this->currentPlayer;
+	if(this->currentPlayer->getPosition() >= this->numSquares-1){
+		this->currentPlayer->setPosition(this->numSquares-1);
+		this->headPlayer = this->indexCurrentPlayer;
 		this->isFinish = true;
 	} else
 		//se il giocatore non è arrivato alla fine controllo se è in testa
 		this->checkHeadTilePlayer();
 }
 
-void Game::movePlayerBackward(Player* player,int steps){
-	player->setPosition(player->getPosition() - steps);
+void Game::movePlayerBackward(int steps){
+	this->currentPlayer->setPosition(this->currentPlayer->getPosition() - steps);
 
 	//controllo sul movimento sulla prima cella
-	if(player->getPosition() <= 0)
-		player->setPosition(0);
+	if(this->currentPlayer->getPosition() <= 0)
+		this->currentPlayer->setPosition(0);
 
 	this->checkHeadTilePlayer();
 }
 
+void Game::swapPlayerHead(){
+	int posTmp = this->currentPlayer->getPosition();
+	this->currentPlayer->setPosition(this->currentPlayer->getPosition());
+	this->currentPlayer->setPosition(posTmp);
+}
 
-void Game::swapPlayer(Player* first, Player* second){
-	int posTmp = first->getPosition();
-	first->setPosition(second->getPosition());
-	second->setPosition(posTmp);
+void Game::swapPlayerTile(){
+	int posTmp = this->currentPlayer->getPosition();
+	this->currentPlayer->setPosition(this->currentPlayer->getPosition());
+	this->currentPlayer->setPosition(posTmp);
 }
 
 void Game::checkHeadTilePlayer(){
@@ -308,13 +360,15 @@ void Game::checkHeadTilePlayer(){
  *
  */
 void Game::printWinner(){
-	cout << "Il vincitore è: " << players[this->headPlayer];
+	cout << "Il vincitore è: " << players[this->headPlayer]->getName();
 }
 
 void Game::printLooser(){
 
 }
 
-void Game::endMessage();
+void Game::endMessage(){
+
+}
 
 
