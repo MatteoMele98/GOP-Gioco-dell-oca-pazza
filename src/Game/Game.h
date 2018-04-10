@@ -16,14 +16,14 @@
 #include "../Deck/Deck.h"
 #include "../AuxiliaryFunctions.h"
 
-//#include "../Deck/Deck.h"
 
 extern int sum[];
 using namespace std;
 
+/*
 enum effect {
 	//positive effect for Squares and Cards
-	oveForward,		//0
+	moveForward,		//0
 	addMoney,   		//1
 
 	//negative effect for Squares and Cards
@@ -35,6 +35,7 @@ enum effect {
 	swapHead,
 	swapTile
 };
+*/
 
 class Game {
 private:
@@ -69,9 +70,8 @@ private:
 	void printBoard();
 
 	int rollDice();
-	int pickCard();
-	void executeSquare(Player* player, int typeSquare);
-	void executeEffect(Player* player, int effect);
+//	void executeSquare(Player* player, int typeSquare);
+//	void executeEffect(Player* player, int effect);
 	void nextPlayer();
 
 	//fine
@@ -105,9 +105,13 @@ public:
 	void swapPlayerHead();
 	void swapPlayerTile();
 
+	//pone al currentPlayer una domanda random, fa rispodere,
+	//se risp giusta->effetto positivo
+	//else effetto negativo
+	void answerQuestion();
 
-	//Stabilisce se il giocatore corrente è il propritario della casella in cui si trova
-	bool checkOwnership();
+	//pesca una carta secondo certe percetuali e la restituisce
+	Card* pickCard();
 
 
 

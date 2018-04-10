@@ -17,6 +17,8 @@ private:
 public:
 	CardMoveBackward();
 	int getValue();
+
+	void executeCard(Game* game);
 };
 
 #endif /* CARD_CARDMOVEBACKWARD_H_ */

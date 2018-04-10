@@ -17,6 +17,8 @@ private:
 public:
 	CardAddMoney();
 	int getValue();
+
+	void executeCard(Game* game);
 };
 
 #endif /* CARD_CARDADDMONEY_H_ */

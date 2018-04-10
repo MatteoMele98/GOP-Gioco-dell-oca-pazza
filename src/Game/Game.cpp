@@ -56,13 +56,12 @@ void Game::gameLoop(){
 	//recap situazione del giocatore
 	this->currentPlayer->printPlayerInfo();
 
-<<<<<<< HEAD
+
 	//il giocatore può giocare solo se NON è in bancarotta
 	if(!this->currentPlayer->isBankruptcy()){
-=======
-	//il giocatore puÃ² giocare solo se NON Ã¨ in bancarotta
-	if(!players[this->currentPlayer]->isBankruptcy()){
->>>>>>> 1571605bf5e96f81b4472d356f4494e10938bdc2
+
+	//il giocatore può giocare solo se NON è in bancarotta
+	if(!this->currentPlayer->isBankruptcy()){
 
 		//tiro dei dadi
 		int steps = this->rollDice();
@@ -77,16 +76,15 @@ void Game::gameLoop(){
 		//sei nella casella x di tipo ------
 
 		//esecuzione della casella in base al tipo
-		this->executeSquare(this->currentPlayer, this->currentSquare->getType());
+		this->currentSquare->executeSquare(this);
 	}
 	else
-<<<<<<< HEAD
+
 	//se il giocatore è in bancarotta
 	cout << this->currentPlayer->getName() << " sei in Bancarotta!" << endl;
-=======
-	//se il giocatore Ã¨ in bancarotta
+
+	//se il giocatore è in bancarotta
 	cout << players[this->currentPlayer]->getName() << " sei in Bancarotta!" << endl;
->>>>>>> 1571605bf5e96f81b4472d356f4494e10938bdc2
 
 	//se tutti i giocatori sono in bancarotta
 	if(this->defaultPlayers == this->numPlayers){
@@ -133,7 +131,6 @@ void Game::printBoard(){
 int Game::rollDice();
 
 
-int Game::pickCard();
 
 void Game::executeSquare(Player* player, int typeSquare){
 	switch(typeSquare)
@@ -145,7 +142,7 @@ void Game::executeSquare(Player* player, int typeSquare){
 
 	case Pitfall:
 
-		//se Ã¨ libera la si puÃ² comprare
+		//se è libera la si può comprare
 		if(!board[player->getPosition()]->getBought())
 			this->buy(player,board[player->getPosition()]);
 
@@ -234,13 +231,11 @@ void Game::nextPlayer(){
 //=====================================================
 void Game::buy(){
 	/*
-<<<<<<< HEAD
+
 	 * lavoro sempre con player[this->currentPlayer]
 	 *
 	 * Può essere chiamata da:
-=======
-	 * PuÃ² essere chiamata da:
->>>>>>> 1571605bf5e96f81b4472d356f4494e10938bdc2
+	 * Può essere chiamata da:
 	 * - Pitfall Square
 	 * - Buy Square
 	 *
@@ -250,14 +245,11 @@ void Game::buy(){
 	 * incova getBought()
 	 * setta il nuovo messaggio della casella:
 	 * - Trappola
-<<<<<<< HEAD
 	 * - proprietà di player->getName()
 	 *
 	 *
 	 * ???? far uscire "Non hai soldi" prima di aver provato a comprare o subito?
-=======
 	 * - proprietÃ  di player->getName()
->>>>>>> 1571605bf5e96f81b4472d356f4494e10938bdc2
 	 */
 
 	int typeSquare = this->currentSquare->getType();
@@ -370,6 +362,32 @@ void Game::checkHeadTilePlayer(){
 	}
 }
 
+Card* Game::pickCard(){
+	/*
+	 * Card* tmpCard;
+	 *
+	 	int numR = (rand() % 100+1);
+		if (numR < 25)
+		return new CardLoseMoney();
+		if(numR < 50)
+		return new CardAddMoney();
+		if(numR < 55)
+		return new CardSwapHead();
+		if(numR < 60)
+		return new CardSwapTile();
+		if(numR < 80)
+		return new CardPickQuestion();
+		if(numR < 90)
+		return new CardMoveForward();
+		if(numR <= 100)
+		return new CardMoveBackward();
+	 *
+	 *
+	 *
+	 * return tmpCard;
+	 */
+}
+
 
 
 /*
@@ -378,11 +396,10 @@ void Game::checkHeadTilePlayer(){
  *
  */
 void Game::printWinner(){
-<<<<<<< HEAD
+
 	cout << "Il vincitore è: " << players[this->headPlayer]->getName();
-=======
+
 	cout << "Il vincitore Ã¨: " << players[this->headPlayer];
->>>>>>> 1571605bf5e96f81b4472d356f4494e10938bdc2
 }
 
 void Game::printLooser(){

@@ -13,6 +13,8 @@
 class CardPickQuestion: public Card {
 public:
 	CardPickQuestion();
+
+	void executeCard(Game* game);
 };
 
 #endif /* CARD_CARDPICKQUESTION_H_ */

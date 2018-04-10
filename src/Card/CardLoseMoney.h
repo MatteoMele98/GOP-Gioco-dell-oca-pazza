@@ -17,6 +17,8 @@ private:
 public:
 	CardLoseMoney();
 	int getValue();
+
+	void executeCard(Game* game);
 };
 
 #endif /* CARD_CARDLOSEMONEY_H_ */

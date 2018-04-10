@@ -12,3 +12,7 @@ SquarePickCard::SquarePickCard() {
 	this->setMessage(initialMessage);
 	this->setType(PickCard);
 }
+
+void SquarePickCard::executeSquare(Game* game){
+	game->pickCard()->executeCard(game);
+}

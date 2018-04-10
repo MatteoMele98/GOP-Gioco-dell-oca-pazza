@@ -12,6 +12,8 @@
 class SquarePickCard: public Square {
 public:
 	SquarePickCard();
+
+	void executeSquare(Game* game);
 };
 
 #endif /* SQUARE_SQUAREPICKCARD_H_ */

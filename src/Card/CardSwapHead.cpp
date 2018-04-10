@@ -13,3 +13,6 @@ CardSwapHead::CardSwapHead() {
 	strcpy(this->message,newMessage);
 }
 
+void CardSwapHead::executeCard(Game* game){
+	game->swapPlayerHead();
+}

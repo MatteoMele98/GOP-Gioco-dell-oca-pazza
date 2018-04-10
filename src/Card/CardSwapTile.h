@@ -13,6 +13,8 @@
 class CardSwapTile: public Card {
 public:
 	CardSwapTile();
+
+	void executeCard(Game* game);
 };
 
 #endif /* CARD_CARDSWAPTILE_H_ */

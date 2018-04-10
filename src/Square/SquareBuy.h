@@ -20,6 +20,8 @@ public:
 	char* getOwnership();
 	int getPositiveEffect();
 	int getNegativeEffect();
+
+	void executeSquare(Game* game);
 };
 
 #endif /* SQUARE_SQUAREBUY_H_ */

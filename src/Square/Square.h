@@ -31,7 +31,7 @@ class Square {
 protected:
 	int type;
 	char message[max_lengthS];
-	//virtual ~Square(){}; //virtual destructor
+	virtual ~Square(){}; //virtual destructor
 
 public:
 	Square();
@@ -40,7 +40,7 @@ public:
 	void setMessage(char message[]);
 	char* getMessage();
 
-	//void virtual executeSquare(Game* game){};
+	void virtual executeSquare(Game* game);
 };
 
 #endif /* SQUARE_SQUARE_H_ */

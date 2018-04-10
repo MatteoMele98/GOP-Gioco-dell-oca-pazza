@@ -34,3 +34,28 @@ int SquareBuy::getPositiveEffect(){
 int SquareBuy::getNegativeEffect(){
 	return this->negativeEffect;
 }
+
+void SquareBuy::executeSquare(Game* game){
+	//se è libera la si può comprare
+	if(!this->bought)
+		game->buy();
+	else {
+		//la casella è stata comprata
+
+		//1. il giocatore corrente è il proprietario
+		if(!strcmp(this->getOwnership(),game->currentPlayer->getName())){
+			if(this->positiveEffect == effect::moveForward)
+				game->movePlayerForward(randomBetween(1,6));
+
+			else if (this->positiveEffect() == effect::addMoney)
+				game->increasePlayerMoney(prices[randomBetween(0,4)]);
+		} else {
+		//2. il giocatore corrente non è il proprietario
+			if(this->negativeEffect == effect::moveBackward)
+				game->movePlayerBackward(randomBetween(1,6));
+
+			else if(this->negativeEffect == effect::loseMoney)
+				game->decreasePlayerMoney(prices[randomBetween(0,4)]);
+		}
+	}
+}

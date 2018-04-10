@@ -32,11 +32,11 @@ bool SquarePitfall::getBought(){
 	return this->bought;
 }
 
-//void SquarePitfall::executeSquare(Game* game){
-//	//se è libera la si può comprare
-//	if(!this->bought)
-//		game->buy();
-//
-//	//altrimenti non fa niente
-//}
+void SquarePitfall::executeSquare(Game* game){
+	//se è libera la si può comprare
+	if(!this->bought)
+		game->buy();
+
+	//altrimenti non fa niente
+}
 

@@ -13,4 +13,6 @@ CardPickQuestion::CardPickQuestion() {
 	strcpy(this->message,newMessage);
 }
 
-
+void CardPickQuestion::executeCard(Game* game){
+	//game->answerQuestion()
+}

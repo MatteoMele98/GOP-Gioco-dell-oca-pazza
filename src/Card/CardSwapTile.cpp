@@ -13,4 +13,6 @@ CardSwapTile::CardSwapTile() {
 	strcpy(this->message,newMessage);
 }
 
-
+void CardSwapTile::executeCard(Game* game){
+	game->swapPlayerTile();
+}

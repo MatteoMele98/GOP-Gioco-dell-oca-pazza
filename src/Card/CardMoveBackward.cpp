@@ -2,13 +2,13 @@
  * CardMoveBackward.cpp
  *
  *  Created on: 03 apr 2018
- *      Author: utente
+ *      Author: Leo
  */
 
 #include "CardMoveBackward.h"
 
 CardMoveBackward::CardMoveBackward() {
-	this->setType(moveBackward);
+	this->setType(cardTypes::moveBackward);
 	this->value = randomBetween(1,6); //da 1 a 6 passi indietro
 	char newMessage[max_lengthC];
 
@@ -23,4 +23,8 @@ CardMoveBackward::CardMoveBackward() {
 
 int CardMoveBackward::getValue(){
 	return this->value;
+}
+
+void CardMoveBackward::executeCard(Game* game){
+	game->movePlayerBackward(this->value);
 }

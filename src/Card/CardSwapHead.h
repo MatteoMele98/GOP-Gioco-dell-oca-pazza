@@ -13,6 +13,8 @@
 class CardSwapHead: public Card {
 public:
 	CardSwapHead();
+
+	void executeCard(Game* game);
 };
 
 #endif /* CARD_CARDSWAPHEAD_H_ */

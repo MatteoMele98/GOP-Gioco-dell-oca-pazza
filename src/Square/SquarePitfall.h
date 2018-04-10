@@ -22,6 +22,8 @@ public:
 	int getCost();
 	void setBought();
 	bool getBought();
+
+	void executeSquare(Game* game);
 };
 
 #endif /* SQUARE_SQUAREPITFALL_H_ */

@@ -8,6 +8,7 @@
 #ifndef CARD_CARD_H_
 #define CARD_CARD_H_
 
+#include "../Game/Game.h"
 #include "../AuxiliaryFunctions.h"
 #include <cstring> //put it in game
 #include <cstdio>
@@ -28,8 +29,9 @@ enum cardTypes {
 };
 
 class Card {
-public:
+protected:
 	int type;
+	virtual ~Card(){}; //virtual destructor
 
 public:
 	char message[max_lengthC];
@@ -39,6 +41,8 @@ public:
 	char* getMessage();
 	void setType(int type);
 	int getType();
+
+	virtual void executeCard(Game* game);
 };
 
 #endif /* CARD_CARD_H_ */

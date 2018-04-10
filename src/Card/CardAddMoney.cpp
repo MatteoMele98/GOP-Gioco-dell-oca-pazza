@@ -8,7 +8,7 @@
 #include "CardAddMoney.h"
 
 CardAddMoney::CardAddMoney() {
-	this->setType(addMoney);
+	this->setType(cardTypes::addMoney);
 	this->value = sum[randomBetween(0,4)];
 	char newMessage[max_lengthC];
 
@@ -19,5 +19,9 @@ CardAddMoney::CardAddMoney() {
 
 int CardAddMoney::getValue(){
 	return this->value;
+}
+
+void CardAddMoney::executeCard(Game* game){
+	game->increasePlayerMoney(this->value);
 }
 
