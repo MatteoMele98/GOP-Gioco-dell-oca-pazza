@@ -9,7 +9,7 @@
 
 
 SquareBuy::SquareBuy(): SquarePitfall() {
-	this->setType(Buy);
+	this->setType(SquareTypes::Buy);
 	char initialOwner[] = "empty";
 	strcpy(this->ownership,initialOwner);
 	this->positiveEffect = randomBetween(0,1); //random number for P effect -- 0 or 1
@@ -57,25 +57,17 @@ void SquareBuy::buy(Game* game){
 			//setto la proprietà della casella
 			this->setOwnership(game->currentPlayer->getName());
 
-			cout << endl << "Casella acquistata!" << endl;
-			cout << game->currentPlayer->getName() << " , ora sei il proprietario di questa casella!" << endl;
 			sprintf(newMessage,"Proprietà di %s",game->currentPlayer->getName());
-
 			//setto il nuovo messaggio per la stampa del tabellone
 			game->currentSquare->setMessage(newMessage);
 
-			/*
-			 * cout << game->currentPlayer->getName() <<", hai diritto all'effetto positivo!" << endl
-			 *
-			 * if(this->positiveEffect == effect::moveForward)
-					game->movePlayerForward(randomBetween(1,6));
+			cout << game->currentPlayer->getName() << " , ora sei il proprietario di questa casella! Hai diritto all'effetto positivo!" << endl;
 
-				else if (this->positiveEffect() == effect::addMoney)
-					game->increasePlayerMoney(prices[randomBetween(0,4)]);
-			 *
-			 *
-			 *
-			 */
+		    if(this->positiveEffect == effect::moveForward)
+				game->movePlayerForward(randomBetween(1,6));
+
+			else if (this->positiveEffect == effect::addMoney)
+				game->increasePlayerMoney(prices[randomBetween(0,4)]);
 
 		} else {
 			//il giocatore non vuole acquistare la casella
@@ -90,12 +82,15 @@ void SquareBuy::buy(Game* game){
 void SquareBuy::executeSquare(Game* game){
 	//se è libera la si può comprare
 	if(!this->bought)
-		game->buy();
+		this->buy(game);
 	else {
 		//la casella è stata comprata
 
 		//1. il giocatore corrente è il proprietario
 		if(!strcmp(this->getOwnership(),game->currentPlayer->getName())){
+
+			cout << game->currentPlayer->getName() << ", sei il propritario di questa casella. Hai diritto ad un effetto positivo!" << endl;
+
 			if(this->positiveEffect == effect::moveForward)
 				game->movePlayerForward(randomBetween(1,6));
 
@@ -103,6 +98,8 @@ void SquareBuy::executeSquare(Game* game){
 				game->increasePlayerMoney(prices[randomBetween(0,4)]);
 		} else {
 		//2. il giocatore corrente non è il proprietario
+			cout << game->currentPlayer->getName() <<", questa casella è di proprietà di " << this->getOwnership() << ". Effetto negativo!" << endl;
+
 			if(this->negativeEffect == effect::moveBackward)
 				game->movePlayerBackward(randomBetween(1,6));
 

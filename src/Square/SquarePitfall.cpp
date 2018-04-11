@@ -11,7 +11,7 @@ int prices[]  = {1000,1500,2000,2500,3000};
 SquarePitfall::SquarePitfall() {
 	char initialMessage[] = "COMPRA?";
 	this->setMessage(initialMessage);
-	this->setType(Pitfall);
+	this->setType(SquareTypes::Pitfall);
 	this->cost =  prices[randomBetween(0,4)];
 }
 
@@ -55,8 +55,8 @@ void SquarePitfall::buy(Game* game){
 			cout << "Casella acquistata!" << endl;
 			//game->pause()
 			cout << "...CASELLA TRAPPOLA!" << endl;
-			sprintf(newMessage,"%s", "TRAPPOLA");
 
+			sprintf(newMessage,"%s", "TRAPPOLA");
 			//setto il nuovo messaggio per la stampa del tabellone
 			this->setMessage(newMessage);
 
@@ -72,8 +72,7 @@ void SquarePitfall::buy(Game* game){
 void SquarePitfall::executeSquare(Game* game){
 	//se è libera la si può comprare
 	if(!this->bought)
-		game->buy();
+		this->buy(game);
 
-	//altrimenti non fa niente
 }
 
