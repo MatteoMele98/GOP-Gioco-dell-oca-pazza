@@ -23,6 +23,7 @@ public:
 	void setBought();
 	bool getBought();
 
+	void buy(Game* game);
 	void executeSquare(Game* game);
 };
 

@@ -66,11 +66,10 @@ void Game::gameLoop(){
 
 		//movimento nella casella corrispondente
 		this->movePlayerForward(steps);
+		//sei nella casella x di tipo ------
 
 		//stampa del tabellone aggioranto
 		this->printBoard();
-
-		//sei nella casella x di tipo ------
 
 		//esecuzione della casella in base al tipo
 		this->currentSquare->executeSquare(this);
@@ -104,7 +103,7 @@ void Game::printCurrentTurn(){
 	 *
 	 */
 
-	for(int i=0; i<100; i++)
+	for(int i=0; i<120; i++)
 		cout << "*";
 		cout << endl;
 
@@ -113,7 +112,7 @@ void Game::printCurrentTurn(){
 
 	cout << "TURNO " << this->currentTurn << endl;
 
-	for(int i=0; i<100; i++)
+	for(int i=0; i<120; i++)
 			cout << "*";
 
 }
@@ -317,7 +316,7 @@ void Game::movePlayerForward(int steps){
 		this->headPlayer = this->indexCurrentPlayer;
 		this->isFinish = true;
 	} else
-		//se il giocatore non Ã¨ arrivato alla fine controllo se Ã¨ in testa
+		//se il giocatore non è arrivato alla fine controllo se è in testa
 		this->checkHeadTilePlayer();
 }
 

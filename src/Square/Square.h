@@ -40,6 +40,7 @@ public:
 	void setMessage(char message[]);
 	char* getMessage();
 
+	void virtual buy(Game* game);	//override in pitfall and buy square
 	void virtual executeSquare(Game* game);
 
 };

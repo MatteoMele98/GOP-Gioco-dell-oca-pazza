@@ -32,6 +32,43 @@ bool SquarePitfall::getBought(){
 	return this->bought;
 }
 
+void SquarePitfall::buy(Game* game){
+	if(game->currentPlayer->getSum() >= this->cost){
+		char ans;
+		cout << "La casella numero " << game->currentPlayer->getPosition()+1 << "costa: " << this->cost << "$" << '\n';
+
+		do {
+			cout << "Vuoi acquistarla? ['s' per sì/'n' per no]" << endl;
+			cin >> ans;
+			cin.ignore(100,'\n');
+		} while (ans != 's' || ans != 'S' || ans != 'n' || ans != 'N');
+
+		//acquisto della casella
+		if(ans == 's' || ans == 'S'){
+			char newMessage[];
+
+			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
+			this->setBought();
+			//diminuisco la somma del giocatore
+			game->decreasePlayerMoney(this->cost);
+
+			cout << "Casella acquistata!" << endl;
+			//game->pause()
+			cout << "...CASELLA TRAPPOLA!" << endl;
+			sprintf(newMessage,"%s", "TRAPPOLA");
+
+			//setto il nuovo messaggio per la stampa del tabellone
+			this->setMessage(newMessage);
+
+		} else {
+			//il giocatore non vuole acquistare la casella
+			cout << "Casella non acquistata." << endl;
+		}
+
+	} else
+		cout << game->currentPlayer->getName() << ",non hai abbasta soldi per comprare questa casella!" << endl;
+}
+
 void SquarePitfall::executeSquare(Game* game){
 	//se è libera la si può comprare
 	if(!this->bought)

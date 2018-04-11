@@ -52,8 +52,6 @@ private:
 	int numSquares = 0;
 
 	int indexCurrentPlayer = 0;
-	Player* currentPlayer = players[this->indexCurrentPlayer];
-	Square* currentSquare = board[this->currentPlayer->getPosition()];
 	int currentTurn = 1; //indica il turno corrente
 	int headPlayer = 0;	//numero (nell'array) del giocatore in testa   0-3 <----- il vincitore è qui
 	int tilePlayer = 0; //numero (nell'array) del giocatore in coda    0-3
@@ -85,6 +83,10 @@ private:
 
 public:
 	Game();
+
+	//current player and current square. Used in card and square classes
+	Player* currentPlayer = players[this->indexCurrentPlayer];
+	Square* currentSquare = board[this->currentPlayer->getPosition()];
 
 	//decrementa i soldi del player corrente, controlla la bancarotta
 	void decreasePlayerMoney(int sum);
