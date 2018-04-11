@@ -17,7 +17,7 @@
 #include "../AuxiliaryFunctions.h"
 
 
-extern int sum[];
+extern int sum[]; 	//array of prices/bonus/malus of money. Implemented in Game
 using namespace std;
 
 
@@ -29,11 +29,6 @@ enum effect {
 	//negative effect for Squares and Cards
 	moveBackward,		//2
 	loseMoney,			//3
-
-	//effect for cards
-	pickQuestion, 		//4
-	swapHead,
-	swapTile
 };
 
 

@@ -7,13 +7,12 @@
 
 #include "SquareBuy.h"
 
-
 SquareBuy::SquareBuy(): SquarePitfall() {
 	this->setType(SquareTypes::Buy);
 	char initialOwner[] = "empty";
 	strcpy(this->ownership,initialOwner);
-	this->positiveEffect = randomBetween(0,1); //random number for P effect -- 0 or 1
-	this->negativeEffect = randomBetween(2,3);; //random number for N effect -- 2 or 3
+	this->positiveEffect = randomBetween(effect::moveForward,effect::addMoney); 	//pick a random positive effect
+	this->negativeEffect = randomBetween(effect::moveBackward,effect::loseMoney);; 	//pick a random negative effect
 }
 
 void SquareBuy::setOwnership(char playerName[]){
@@ -27,13 +26,13 @@ char* SquareBuy::getOwnership(){
 	return this->ownership;
 }
 
-int SquareBuy::getPositiveEffect(){
-	return this->positiveEffect;
-}
-
-int SquareBuy::getNegativeEffect(){
-	return this->negativeEffect;
-}
+//int SquareBuy::getPositiveEffect(){
+//	return this->positiveEffect;
+//}
+//
+//int SquareBuy::getNegativeEffect(){
+//	return this->negativeEffect;
+//}
 
 void SquareBuy::buy(Game* game){
 	if(game->currentPlayer->getSum() >= this->cost){
@@ -67,7 +66,7 @@ void SquareBuy::buy(Game* game){
 				game->movePlayerForward(randomBetween(1,6));
 
 			else if (this->positiveEffect == effect::addMoney)
-				game->increasePlayerMoney(prices[randomBetween(0,4)]);
+				game->increasePlayerMoney(sum[randomBetween(0,4)]);
 
 		} else {
 			//il giocatore non vuole acquistare la casella
@@ -95,7 +94,7 @@ void SquareBuy::executeSquare(Game* game){
 				game->movePlayerForward(randomBetween(1,6));
 
 			else if (this->positiveEffect() == effect::addMoney)
-				game->increasePlayerMoney(prices[randomBetween(0,4)]);
+				game->increasePlayerMoney(sum[randomBetween(0,4)]);
 		} else {
 		//2. il giocatore corrente non è il proprietario
 			cout << game->currentPlayer->getName() <<", questa casella è di proprietà di " << this->getOwnership() << ". Effetto negativo!" << endl;
@@ -104,7 +103,7 @@ void SquareBuy::executeSquare(Game* game){
 				game->movePlayerBackward(randomBetween(1,6));
 
 			else if(this->negativeEffect == effect::loseMoney)
-				game->decreasePlayerMoney(prices[randomBetween(0,4)]);
+				game->decreasePlayerMoney(sum[randomBetween(0,4)]);
 		}
 	}
 }

@@ -9,9 +9,6 @@
 #define SQUARE_SQUAREPITFALL_H_
 #include "Square.h"
 
-extern int prices[];
-
-
 class SquarePitfall:public Square {
 public:
 	int cost;

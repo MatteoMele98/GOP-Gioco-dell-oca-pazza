@@ -8,7 +8,6 @@
 #include "CardSwapTile.h"
 
 CardSwapTile::CardSwapTile() {
-	this->setType(swapTile);
 	char newMessage[] = "Scambia la tua posizione con quella del giocatore in coda!";
 	strcpy(this->message,newMessage);
 }

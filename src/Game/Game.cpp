@@ -8,6 +8,8 @@
 #include <iostream>
 #include "Game.h"
 
+int sum[] = {1000,1500,2000,2500,3000};
+
 
 Game::Game() {
 	//srand(time(0));

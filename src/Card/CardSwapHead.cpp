@@ -8,7 +8,6 @@
 #include "CardSwapHead.h"
 
 CardSwapHead::CardSwapHead() {
-	this->setType(swapHead);
 	char newMessage[] = "Scambia la tua posizione con quella del giocatore in testa!";
 	strcpy(this->message,newMessage);
 }

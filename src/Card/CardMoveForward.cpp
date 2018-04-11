@@ -8,7 +8,6 @@
 #include "CardMoveForward.h"
 
 CardMoveForward::CardMoveForward() {
-	this->setType(cardTypes::moveForward);
 	this->value = randomBetween(1,6); //da 1 a 6 passi avanti
 	char newMessage[max_lengthC];
 

@@ -8,7 +8,6 @@
 #include "CardMoveBackward.h"
 
 CardMoveBackward::CardMoveBackward() {
-	this->setType(cardTypes::moveBackward);
 	this->value = randomBetween(1,6); //da 1 a 6 passi indietro
 	char newMessage[max_lengthC];
 

@@ -8,7 +8,6 @@
 #include "CardLoseMoney.h"
 
 CardLoseMoney::CardLoseMoney() {
-	this->setType(cardTypes::loseMoney);
 	this->value = sum[randomBetween(0,4)];
 	char newMessage[max_lengthC];
 

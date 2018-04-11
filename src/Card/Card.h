@@ -15,22 +15,9 @@
 
 
 const int max_lengthC = 100;
-extern int sum[]; //somme di denaro da sommare o sottrare
-
-
-enum cardTypes {
-	addMoney,		//0
-	loseMoney,		//1
-	moveForward,	//2
-	moveBackward,	//3
-	swapHead,		//4
-	swapTile,		//5
-	pickQuestion	//6
-};
 
 class Card {
 protected:
-	int type;
 	virtual ~Card(){}; //virtual destructor
 
 public:
@@ -39,8 +26,6 @@ public:
 	Card();
 	void setMessage(char*  message);
 	char* getMessage();
-	void setType(int type);
-	int getType();
 
 	virtual void executeCard(Game* game);
 };

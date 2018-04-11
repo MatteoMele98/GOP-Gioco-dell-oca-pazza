@@ -6,13 +6,12 @@
  */
 
 #include "SquarePitfall.h"
-int prices[]  = {1000,1500,2000,2500,3000};
 
 SquarePitfall::SquarePitfall() {
 	char initialMessage[] = "COMPRA?";
 	this->setMessage(initialMessage);
 	this->setType(SquareTypes::Pitfall);
-	this->cost =  prices[randomBetween(0,4)];
+	this->cost =  sum[randomBetween(0,4)];
 }
 
 void SquarePitfall::setCost(int cost){
@@ -73,6 +72,5 @@ void SquarePitfall::executeSquare(Game* game){
 	//se è libera la si può comprare
 	if(!this->bought)
 		this->buy(game);
-
 }
 
