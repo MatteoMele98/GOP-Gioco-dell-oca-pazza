@@ -8,11 +8,14 @@
 #include "CardPickQuestion.h"
 
 CardPickQuestion::CardPickQuestion() {
-	this->setType(pickQuestion);
+	this->setType(cardTypes::pickQuestion);
 	char newMessage[] = "Pesca una domanda!";
 	strcpy(this->message,newMessage);
 }
 
 void CardPickQuestion::executeCard(Game* game){
-	//game->answerQuestion()
+	if(game->answerQuestion())
+		//game->positiveEffect
+	else
+		//game->negativeEffect
 }

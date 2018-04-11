@@ -60,9 +60,6 @@ void Game::gameLoop(){
 	//il giocatore può giocare solo se NON è in bancarotta
 	if(!this->currentPlayer->isBankruptcy()){
 
-	//il giocatore può giocare solo se NON è in bancarotta
-	if(!this->currentPlayer->isBankruptcy()){
-
 		//tiro dei dadi
 		int steps = this->rollDice();
 		//hai fatto x  ---------------------> messsaggio qui o in rollDice()
@@ -132,89 +129,89 @@ int Game::rollDice();
 
 
 
-void Game::executeSquare(Player* player, int typeSquare){
-	switch(typeSquare)
-	case Start:
-		break;
+//void Game::executeSquare(Player* player, int typeSquare){
+//	switch(typeSquare)
+//	case Start:
+//		break;
+//
+//	case Void:
+//		break;
+//
+//	case Pitfall:
+//
+//		//se è libera la si può comprare
+//		if(!board[player->getPosition()]->getBought())
+//			this->buy(player,board[player->getPosition()]);
+//
+//		//altrimenti non fa niente
+//		break;
+//
+//	case Buy:
+//
+//		//se Ã¨ libera la si puÃ² comprare e si ha accesso all'effetto positivo
+//		if(!board[player->getPosition()]->getBought()){
+//			this->buy(player,board[player->getPosition()]);
+//			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
+//		}
+//
+//		//se la casella Ã¨ gia comprata da un diverso proprietario --> effetto negativo
+//		else if(!strcmp(player[this->currentPlayer],board[player->getPosition()]->getOwnership()))
+//			this->executeEffect(player,board[player->getPosition()]->getNegativeEffect());
+//		else
+//		//se la casella Ã¨ stata acquistata dallo stesso giocatore --> effetto positivo
+//			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
+//		break;
+//
+//	case PickCard:
+//
+//		//pesca una tipologia di carta e esegue l'effetto corrispondente
+//		int cardType = this->pickCard();
+//		this->executeEffect(player,cardType); //riordina le carte
+//		break;
+//
+//	case Finish:
+//		//non fa nulla movePlayerForward() setta isFinish=TRUE e il giocatore vincente in testa
+//		break;
+//
+//}
 
-	case Void:
-		break;
 
-	case Pitfall:
-
-		//se è libera la si può comprare
-		if(!board[player->getPosition()]->getBought())
-			this->buy(player,board[player->getPosition()]);
-
-		//altrimenti non fa niente
-		break;
-
-	case Buy:
-
-		//se Ã¨ libera la si puÃ² comprare e si ha accesso all'effetto positivo
-		if(!board[player->getPosition()]->getBought()){
-			this->buy(player,board[player->getPosition()]);
-			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
-		}
-
-		//se la casella Ã¨ gia comprata da un diverso proprietario --> effetto negativo
-		else if(!strcmp(player[this->currentPlayer],board[player->getPosition()]->getOwnership()))
-			this->executeEffect(player,board[player->getPosition()]->getNegativeEffect());
-		else
-		//se la casella Ã¨ stata acquistata dallo stesso giocatore --> effetto positivo
-			this->executeEffect(player,board[player->getPosition()]->getPositiveEffect());
-		break;
-
-	case PickCard:
-
-		//pesca una tipologia di carta e esegue l'effetto corrispondente
-		int cardType = this->pickCard();
-		this->executeEffect(player,cardType); //riordina le carte
-		break;
-
-	case Finish:
-		//non fa nulla movePlayerForward() setta isFinish=TRUE e il giocatore vincente in testa
-		break;
-
-}
-
-
-void Game::executeEffect(Player* player, int effect){
-	switch(effect)
-	case effect::moveForward:
-		this->movePlayerForward(randomBetween(1,6));
-		break;
-
-	case effect::addMoney:
-		this->increasePlayerMoney(sum[randomBetween(0,5)]);
-		break;
-
-	case effect::moveBackward:
-		this->movePlayerBackward(randomBetween(1,6));
-		break;
-
-	case effect::loseMoney:
-		this->decreasePlayerMoney(sum[randomBetween(0,5)]);
-		break;
-
-	case effect::pickQuestion:
-		/*
-		 * if(this->answerQuestion())
-		 * 		this->movePlayerForward(player,randomBetween(1,6));
-		 * else
-		 * 		this->movePlayerBackward(player,randomBetween(1,6));
-		 *
-		 */
-		break;
-
-	case effect::swapHead:
-		this->swapPlayerHead();
-		break;
-
-	case effect::swapTile:
-		this->swapPlayerTile();
-		break;
-}
+//void Game::executeEffect(Player* player, int effect){
+//	switch(effect)
+//	case effect::moveForward:
+//		this->movePlayerForward(randomBetween(1,6));
+//		break;
+//
+//	case effect::addMoney:
+//		this->increasePlayerMoney(sum[randomBetween(0,5)]);
+//		break;
+//
+//	case effect::moveBackward:
+//		this->movePlayerBackward(randomBetween(1,6));
+//		break;
+//
+//	case effect::loseMoney:
+//		this->decreasePlayerMoney(sum[randomBetween(0,5)]);
+//		break;
+//
+//	case effect::pickQuestion:
+//		/*
+//		 * if(this->answerQuestion())
+//		 * 		this->movePlayerForward(player,randomBetween(1,6));
+//		 * else
+//		 * 		this->movePlayerBackward(player,randomBetween(1,6));
+//		 *
+//		 */
+//		break;
+//
+//	case effect::swapHead:
+//		this->swapPlayerHead();
+//		break;
+//
+//	case effect::swapTile:
+//		this->swapPlayerTile();
+//		break;
+//}
 
 void Game::nextPlayer(){
 
@@ -245,7 +242,8 @@ void Game::buy(){
 	 * incova getBought()
 	 * setta il nuovo messaggio della casella:
 	 * - Trappola
-	 * - proprietà di player->getName()
+	 * - proprietà di player->getName() come messaggio
+	 * - devo settare Ownership della casella ----> IMPORTANTE
 	 *
 	 *
 	 * ???? far uscire "Non hai soldi" prima di aver provato a comprare o subito?
@@ -275,13 +273,13 @@ void Game::buy(){
 			cout << endl << "Casella acquistata!" << endl;
 
 			//casella di tipo trappola
-			if(typeSquare == Pitfall){
+			if(typeSquare == SquareTypes::Pitfall){
 				cout << "...CASELLA TRAPPOLA!" << endl;
 				 sprintf(newMessage,"%s", "TRAPPOLA");
 			}
 
 			//casella di tipo compra
-			else if (typeSquare == Buy){
+			else if (typeSquare == SquareTypes::Buy){
 				cout << "Ora sei il proprietario di questa casella!" << endl;
 				sprintf(newMessage,"Proprietà di %s",this->currentPlayer->getName());
 			}
@@ -388,6 +386,10 @@ Card* Game::pickCard(){
 	 */
 }
 
+bool answerQuestion(){
+
+}
+
 
 
 /*
@@ -396,10 +398,7 @@ Card* Game::pickCard(){
  *
  */
 void Game::printWinner(){
-
 	cout << "Il vincitore è: " << players[this->headPlayer]->getName();
-
-	cout << "Il vincitore Ã¨: " << players[this->headPlayer];
 }
 
 void Game::printLooser(){

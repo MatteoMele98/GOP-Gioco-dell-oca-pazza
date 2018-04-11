@@ -41,6 +41,7 @@ public:
 	char* getMessage();
 
 	void virtual executeSquare(Game* game);
+
 };
 
 #endif /* SQUARE_SQUARE_H_ */

@@ -21,6 +21,8 @@ public:
 	int getPositiveEffect();
 	int getNegativeEffect();
 
+	int getCost();
+	void setBought();
 	void executeSquare(Game* game);
 };
 

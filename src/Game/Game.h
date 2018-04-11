@@ -20,7 +20,7 @@
 extern int sum[];
 using namespace std;
 
-/*
+
 enum effect {
 	//positive effect for Squares and Cards
 	moveForward,		//0
@@ -35,7 +35,7 @@ enum effect {
 	swapHead,
 	swapTile
 };
-*/
+
 
 class Game {
 private:
@@ -105,10 +105,8 @@ public:
 	void swapPlayerHead();
 	void swapPlayerTile();
 
-	//pone al currentPlayer una domanda random, fa rispodere,
-	//se risp giusta->effetto positivo
-	//else effetto negativo
-	void answerQuestion();
+	//pone al currentPlayer una domanda random, fa rispodere ritorna l'esito
+	bool answerQuestion();
 
 	//pesca una carta secondo certe percetuali e la restituisce
 	Card* pickCard();
