@@ -63,8 +63,6 @@ private:
 	void printBoard();
 
 	int rollDice();
-//	void executeSquare(Player* player, int typeSquare);
-//	void executeEffect(Player* player, int effect);
 	void nextPlayer();
 
 	//fine
@@ -75,6 +73,7 @@ private:
 	//auxiliary
 	//setta il giocatore in testa e quello in coda
 	void checkHeadTilePlayer();
+	void printHeadTilePlayers();
 
 public:
 	Game();
@@ -88,9 +87,6 @@ public:
 
 	//incrementa i soldi di player corrente
 	void increasePlayerMoney(int sum);
-
-	//compra la casella su cui currentPlayer è settato (board[players[currentPlayer]->getPosition()))
-	void buy();
 
  	//controllo ultima cella
 	void movePlayerForward(int steps);

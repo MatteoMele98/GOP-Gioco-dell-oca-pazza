@@ -12,8 +12,8 @@ int randomBetween (int min, int max);
 //min max->Number
 //pick a random number between min and max (included)
 
-
-
+void pressEnter();
+//press enter to continue
 
 
 

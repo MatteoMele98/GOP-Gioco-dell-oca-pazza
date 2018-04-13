@@ -29,6 +29,4 @@ char* Square::getMessage(){
 	return this->message;
 }
 
-//void Square::executeSquare(Game* game){
-//	//richiama la corrispondente funzione in gioco a seconda del tipo di casella
-//}
+void Square::executeSquare(Game* game){}
