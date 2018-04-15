@@ -24,7 +24,7 @@ public:
 	char message[max_lengthC];
 
 	Card();
-	void setMessage(char*  message);
+	void setMessage(char* message);
 	char* getMessage();
 
 	virtual void executeCard(Game* game);

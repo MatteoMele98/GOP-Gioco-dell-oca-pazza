@@ -13,7 +13,6 @@ int sum[] = {1000,1500,2000,2500,3000};
 
 Game::Game() {
 	//srand(time(0));
-
 	this->startMessage();
 	this->printRules();
 	this->initBoard();
@@ -38,7 +37,49 @@ Game::Game() {
  */
 
 void Game::startMessage();
-void Game::printRules();
+
+void Game::printRules(){
+	for(int i=0; i<135; i++)
+		cout << "_";
+	cout << endl;
+
+	for(int i=0; i<7;i++)
+		cout << '\t';
+	cout << "REGOLE DEL GIOCO" << endl;
+
+	for(int i=0; i<135; i++)
+		cout << "_";
+	cout << endl << endl;
+
+	cout << '\t' << "- Premere invio per andare avanti nei vari momenti di gioco." << endl;
+	cout << '\t' << "- I giocatori lanciano a turno i dadi, avanzano nella casella corrispondente";
+	cout <<"e ne eseguono l'effetto."<< endl;
+	cout <<'\t' << "- Ci sono 6 tipi di caselle diverse:" << endl;
+	cout << '\t' << '\t' << "o INIZIO" << endl;
+	cout << '\t' << '\t' << "o VUOTA" << endl;
+	cout << '\t' << '\t' << "o TRAPPOLA" << endl;
+	cout << '\t' << '\t' << "o COMPRA" << endl;
+	cout << '\t' << '\t' << "o PESCA UNA CARTA" << endl;
+	cout << '\t' << '\t' << "o FINE" << endl;
+	cout <<'\t' << "- Ogni giocatore ha una somma di denaro che può usare per comprare le caselle di tipo COMPRA." << endl;
+	cout <<'\t' << " Una volta acquistate, tali caselle daranno un effetto positivo al proprietario (istantaneamente e nei momenti successivi)." << endl;
+	cout <<'\t' << " Non è finita qui però! Ogni volta che un giocatore avversario finirà su una casella già occupata subirà un effetto negativo" << endl;
+	cout <<'\t' << "- E' necessario però acquistare con parsimonia ... nel tabellone sono disseminate caselle TRAPPOLA!" << endl;
+	cout <<'\t' << " Potranno essere acquistate, ma non ci sarà alcun effetto." << endl;
+	cout <<'\t' << "- Se il giocatore finisce i soldi non potra più giocare!" << endl;
+	cout <<'\t' << " Il gioco termina quando: " << endl;
+	cout << '\t' << '\t' << "o un giocatore arriva nella casella finale" << endl;
+	cout << '\t' << '\t' << "o tutti i giocatori vanno in bancarotta" << endl;
+	cout << endl << endl;
+	cout <<'\t' << " Ora sapete tutto! Quindi ..." << endl;
+	pressEnter();
+	cout << '\t' << '\t' << "BUON DIVERTIMENTO!" << endl;
+
+	for(int i=0; i<135; i++)
+		cout << "_";
+	cout << endl << endl;
+}
+
 void Game::initBoard();
 void Game::initPlayers();
 
@@ -92,24 +133,24 @@ void Game::gameLoop(){
 void Game::printCurrentTurn(){
 	/*
 	 *
-	 * ****************************************************************
-	 *						TURNO this->currentTurn
+	 * ______________________________________________________________
 	 *
-	 * ****************************************************************
+	 *						TURNO this->currentTurn
+	 * ______________________________________________________________
 	 *
 	 */
 
-	for(int i=0; i<120; i++)
-		cout << "*";
+	for(int i=0; i<135; i++)
+		cout << "_";
 		cout << endl;
 
-	for(int i=0; i<5;i++)
+	for(int i=0; i<7;i++)
 		cout << '\t';
-
 	cout << "TURNO " << this->currentTurn << endl;
 
-	for(int i=0; i<120; i++)
-			cout << "*";
+	for(int i=0; i<135; i++)
+			cout << "_";
+	cout << endl << endl;
 
 }
 
@@ -122,7 +163,9 @@ void Game::printBoard(){
 
 int Game::rollDice(){
 	int steps = randomBetween(1,12);
-	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << " tira i dadi ... ";
+
+	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName();
+	cout << " tira i dadi ... ";
 	pressEnter();
 	cout << "Hai fatto: " << steps << endl;
 
@@ -144,7 +187,8 @@ void Game::nextPlayer(){
 //=====================================================
 
 void Game::decreasePlayerMoney(int sum){
-	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", perdi " << sum << "$!"<<endl;
+	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName();
+	cout << ", perdi " << sum << "$!"<<endl;
 
 	this->currentPlayer->setSum(this->currentPlayer->getSum() - sum);
 
@@ -157,19 +201,13 @@ void Game::decreasePlayerMoney(int sum){
 }
 
 void Game::increasePlayerMoney(int sum){
-	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", guadagna " << sum << "$!"<<endl;
+	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName();
+	cout << ", guadagna " << sum << "$!"<<endl;
 
 	this->currentPlayer->setSum(this->currentPlayer->getSum() + sum);
 }
 
 void Game::movePlayerForward(int steps){
-	//messaggio
-	if(steps > 1)
-		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", vai avanti di " << steps << " caselle!" <<endl;
-	else
-		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", vai avanti di " << steps << " casella!" <<endl;
-
-	//movimento
 	this->currentPlayer->setPosition(this->currentPlayer->getPosition() + steps);
 
 	//controllo sul movimento sull'ultima cella
@@ -182,16 +220,12 @@ void Game::movePlayerForward(int steps){
 		this->checkHeadTilePlayer();
 
 	//aggiornamento posizione
-	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() <<", sei nella casella " << this->currentPlayer->getPosition()+1 << " di tipo: " << this->currentSquare->getMessage() << endl;
+	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName();
+	cout <<", sei nella casella " << this->currentPlayer->getPosition()+1 << " di tipo: " << this->currentSquare->getMessage() << endl;
 
 }
 
 void Game::movePlayerBackward(int steps){
-	if(steps > 1)
-		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", torna indietro di " << steps << " caselle!" <<endl;
-	else
-		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", torna indietro di " << steps << " casella!" <<endl;
-
 	this->currentPlayer->setPosition(this->currentPlayer->getPosition() - steps);
 
 	//controllo sul movimento sulla prima cella
@@ -201,30 +235,29 @@ void Game::movePlayerBackward(int steps){
 	this->checkHeadTilePlayer();
 
 	//aggiornamento posizione
-	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() <<", sei nella casella " << this->currentPlayer->getPosition()+1 << " di tipo: " << this->currentSquare->getMessage() << endl;
+	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName();
+	cout <<", sei nella casella " << this->currentPlayer->getPosition()+1 << " di tipo: " << this->currentSquare->getMessage() << endl;
 }
 
 void Game::swapPlayerHead(){
 	if(strcmp(this->currentPlayer->getName(),this->players[this->headPlayer]->getName())){
-		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", scambia la tua posizione con quella del giocatore in testa!"<< endl;
-
 		int posTmp = this->currentPlayer->getPosition();
 		this->currentPlayer->setPosition(this->players[this->headPlayer]->getPosition());
 		this->players[this->headPlayer]->setPosition(posTmp);
 	} else
-	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() <<", sei già il giocatore in testa." << endl;
+	cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName();
+	cout <<", sei già il giocatore in testa." << endl;
 
 }
 
 void Game::swapPlayerTile(){
 	if(strcmp(this->currentPlayer->getName(),this->players[this->headPlayer]->getName())){
-		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() << ", scambia la tua posizione con quella del giocatore in coda!"<< endl;
-
 		int posTmp = this->currentPlayer->getPosition();
 		this->currentPlayer->setPosition(this->players[this->tilePlayer]->getPosition());
 		this->players[this->tilePlayer]->setPosition(posTmp);
 	} else
-		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName() <<", sei già il giocatore in coda." << endl;
+		cout << this->currentPlayer->getSymbol() << " " << this->currentPlayer->getName();
+		cout <<", sei già il giocatore in coda." << endl;
 
 }
 
@@ -288,11 +321,14 @@ bool answerQuestion(){
  *
  */
 void Game::printWinner(){
-	cout << "Il vincitore è: " << players[this->headPlayer]->getName() << "!" << endl;
+	cout << "Il vincitore è... " << endl;
+	pressEnter();
+	cout << players[this->headPlayer]->getSymbol() << " " << players[this->headPlayer]->getName() << "!" << endl;
 }
 
 void Game::printLooser(){
 	cout << "Tutti i giocatori sono in BANCAROTTA!" << endl;
+
 }
 
 void Game::endMessage(){

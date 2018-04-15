@@ -10,9 +10,11 @@
 SquarePickCard::SquarePickCard() {
 	char initialMessage[] = "Pesca una carta!";
 	this->setMessage(initialMessage);
-	this->setType(PickCard);
+	this->setType(SquareTypes::PickCard);
 }
 
 void SquarePickCard::executeSquare(Game* game){
+	cout << this->message << "... " << endl;
+	pressEnter();
 	game->pickCard()->executeCard(game);
 }

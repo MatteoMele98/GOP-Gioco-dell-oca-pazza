@@ -19,9 +19,6 @@ public:
 	void setOwnership(char* playerName);
 	char* getOwnership();
 
-//	int getPositiveEffect();
-//	int getNegativeEffect();
-
 	void buy(Game* game);
 	void executeSquare(Game* game);
 };

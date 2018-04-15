@@ -10,6 +10,7 @@
 
 #include <cstring> //put it in game
 #include <iostream>//put it in game
+#include <cstdio>
 
 #include "../Game/Game.h"
 #include "../AuxiliaryFunctions.h"

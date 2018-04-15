@@ -21,5 +21,6 @@ int CardLoseMoney::getValue(){
 }
 
 void CardLoseMoney::executeCard(Game* game){
+	cout << this->message << endl;
 	game->decreasePlayerMoney(this->value);
 }

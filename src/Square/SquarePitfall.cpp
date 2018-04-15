@@ -8,10 +8,9 @@
 #include "SquarePitfall.h"
 
 SquarePitfall::SquarePitfall() {
-	char initialMessage[] = "COMPRA?";
-	this->setMessage(initialMessage);
-	this->setType(SquareTypes::Pitfall);
 	this->cost =  sum[randomBetween(0,4)];
+	this->setType(SquareTypes::Pitfall);
+	sprintf(this->message,"COMPRA? (%d$)",this->cost);
 }
 
 void SquarePitfall::setCost(int cost){
@@ -34,7 +33,8 @@ bool SquarePitfall::getBought(){
 void SquarePitfall::buy(Game* game){
 	if(game->currentPlayer->getSum() >= this->cost){
 		char ans;
-		cout << "La casella numero " << game->currentPlayer->getPosition()+1 << "costa: " << this->cost << "$" << '\n';
+		cout << "La casella numero " << game->currentPlayer->getPosition()+1;
+		cout << " costa: " << this->cost << "$" << endl;
 
 		do {
 			cout << "Vuoi acquistarla? ['s' per sì/'n' per no]" << endl;
@@ -48,11 +48,10 @@ void SquarePitfall::buy(Game* game){
 
 			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
 			this->setBought();
-			//diminuisco la somma del giocatore
 			game->decreasePlayerMoney(this->cost);
 
 			cout << "Casella acquistata!" << endl;
-			//game->pause()
+			pressEnter();
 			cout << "...CASELLA TRAPPOLA!" << endl;
 
 			sprintf(newMessage,"%s", "TRAPPOLA");
@@ -65,7 +64,8 @@ void SquarePitfall::buy(Game* game){
 		}
 
 	} else
-		cout << game->currentPlayer->getName() << ",non hai abbasta soldi per comprare questa casella!" << endl;
+		cout << game->currentPlayer->getName();
+		cout << ",non hai abbasta soldi per comprare questa casella!" << endl;
 }
 
 void SquarePitfall::executeSquare(Game* game){

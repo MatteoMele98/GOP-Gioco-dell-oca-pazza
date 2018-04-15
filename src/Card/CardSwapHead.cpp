@@ -13,5 +13,6 @@ CardSwapHead::CardSwapHead() {
 }
 
 void CardSwapHead::executeCard(Game* game){
+	cout << this->message << endl;
 	game->swapPlayerHead();
 }

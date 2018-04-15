@@ -21,6 +21,7 @@ int CardAddMoney::getValue(){
 }
 
 void CardAddMoney::executeCard(Game* game){
+	cout << this->message << endl;
 	game->increasePlayerMoney(this->value);
 }
 

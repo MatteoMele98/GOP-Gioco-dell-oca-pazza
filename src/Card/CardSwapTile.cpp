@@ -13,5 +13,6 @@ CardSwapTile::CardSwapTile() {
 }
 
 void CardSwapTile::executeCard(Game* game){
+	cout << this->message << endl;
 	game->swapPlayerTile();
 }

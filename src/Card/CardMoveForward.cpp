@@ -25,5 +25,6 @@ int CardMoveForward::getValue(){
 }
 
 void CardMoveForward::executeCard(Game* game){
+	cout << this->message << endl;
 	game->movePlayerForward(this->value);
 }

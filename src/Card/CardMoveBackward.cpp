@@ -25,5 +25,6 @@ int CardMoveBackward::getValue(){
 }
 
 void CardMoveBackward::executeCard(Game* game){
+	cout << this->message << endl;
 	game->movePlayerBackward(this->value);
 }
