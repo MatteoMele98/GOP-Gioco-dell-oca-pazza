@@ -36,7 +36,18 @@ Game::Game() {
  *
  */
 
-void Game::startMessage();
+void Game::startMessage(){
+char* test[] ={
+			"* * * *  * * * *  * * * *",
+		        "*        *     *  *     *",
+			"*   * *  *     *  * * * *",
+			"*     *  *     *  *	  ",
+			"* * * *  * * * *  *	  "
+	};
+	for(int i=0; i<5; i++){
+		cout<<"\t\t\t\t\t"<<test[i]<<endl;
+	}
+}
 
 void Game::printRules(){
 	for(int i=0; i<135; i++)
@@ -80,8 +91,43 @@ void Game::printRules(){
 	cout << endl << endl;
 }
 
-void Game::initBoard();
-void Game::initPlayers();
+void Game::initBoard(){
+	this->numSquares=rand()%20+70;
+	int chance=100;
+	//int i=0;
+	int a=0;
+	board[0]=new SquareStart;
+	board[this->numSquares-1]=new SquareFinish;
+	for(int i=1; i<this->numSquares-1; i++){
+		a=rand() % 100+1;
+		if(a<=chance){
+			this->board[i]=new Square; //casella normale
+			chance=chance-30;
+		}
+		else{
+			a=rand() % 100+1;
+			chance=100;
+			if(a<=34){
+				this->board[i]=new SquarePitfall;
+			} //cout<<'p'<<endl;}
+			else if(a<=67) this->board[i]=new SquarePickCard;
+			else if(a<=100) this->board[i]=new SquareBuy;
+		}
+	}
+}
+void Game::initPlayers(){
+	//numPlayers settato a 0 in Game.h
+	while(!(this->numPlayers>=1 && this->numPlayers<=4)){
+		cout<<"Quanti giocatori siete? È possibile giocare con un minimo di un giocatore e un massimo di 4. ";
+		cin>>this->numPlayers;
+	}
+	char nome[20];
+	for(int i=0; i<this->numPlayers; i++){
+		cout<<"Inserisci il nome del giocatore: ";
+		cin>>nome;
+		this->players[i]=new Player(nome,i);
+	}
+}
 
 
 /*
@@ -156,9 +202,55 @@ void Game::printCurrentTurn(){
 
 void Game::printBoard(){
 	/*
-	 * per ogni casella viene stampato numero e messsaggio associato
+	 * per ogni casella viene stampato numero e messaggio associato
 	 *
 	 */
+	char simboli_gioc_uno[this->numSquares][12];
+	char simboli_gioc_due[this->numSquares][12];
+	char simboli_gioc_tre[this->numSquares][12];
+	char simboli_gioc_quattro[this->numSquares][12];
+	for(int i=0; i<this->numSquares; i++){
+		strcpy(simboli_gioc_uno[i]," ");
+		strcpy(simboli_gioc_due[i]," ");
+		strcpy(simboli_gioc_tre[i]," ");
+		strcpy(simboli_gioc_quattro[i]," ");
+		for(int j=0; j<this->numPlayers; j++){
+
+			if(i==this->players[j]->getPosition()){
+				if(j==0) strcpy(simboli_gioc_uno[i],this->players[j]->getSymbol());
+				else if (j==1) strcpy(simboli_gioc_due[i],this->players[j]->getSymbol());
+				else if (j==2) strcpy(simboli_gioc_tre[i],this->players[j]->getSymbol());
+				else strcpy(simboli_gioc_quattro[i],this->players[j]->getSymbol());
+			}
+		}
+	}
+	//strcpy(simboli_gioc_uno[0],this->players[0]->getSymbol());
+	//strcpy(simboli[10],this->players[1]->getSymbol());
+	//strcpy(simboli_gioc_uno[0],this->players[0]->getSymbol());
+	for(int i=0; i<120; i++) cout<<"_";
+	cout<<endl;
+	for(int i=0; i<30;i++){
+			if(this->board[i]->getType()==PickCard){
+				if(this->board[i+30]->getType()==PickCard){
+					cout <<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 << ". "<<this->board[i]->getMessage()<<"\t\t"<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<' '<<'|'<< i+31 << ". "<<this->board[i+30]->getMessage()<<"\t\t";
+					if(this->numSquares>=i+61) cout<<' '<<simboli_gioc_uno[i+60]<<' '<<simboli_gioc_due[i+60]<<' '<<simboli_gioc_tre[i+60]<<' '<<simboli_gioc_quattro[i+60]<<' '<<'|'<< i+61 << "."<<this->board[i+60]->getMessage()<<"\n";
+					else cout<<endl;
+				}else{ cout<<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 << ". "<<this->board[i]->getMessage()<<"\t\t"<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<' '<<'|'<< i+31 << ". "<<this->board[i+30]->getMessage()<<"\t\t\t";
+						if(this->numSquares>=i+61) cout<<' '<<simboli_gioc_uno[i+60]<<' '<<simboli_gioc_due[i+60]<<' '<<simboli_gioc_tre[i+60]<<' '<<simboli_gioc_quattro[i+60]<<' '<<'|'<< i+61 << "."<<this->board[i+60]->getMessage()<<"\n";
+						else cout<<endl;
+				}
+			}
+			else if(this->board[i+30]->getType()==PickCard){
+				cout <<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 << ". "<<this->board[i]->getMessage()<<"\t\t\t"<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<' '<<'|'<< i+31 << ". "<<this->board[i+30]->getMessage()<<"\t\t";
+				if(this->numSquares>=i+61) cout<<' '<<simboli_gioc_uno[i+60]<<' '<<simboli_gioc_due[i+60]<<' '<<simboli_gioc_tre[i+60]<<' '<<simboli_gioc_quattro[i+60]<<' '<<'|'<< i+61 << "."<<this->board[i+60]->getMessage()<<"\n";
+				else cout<<endl;
+			}
+			else{
+				cout <<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 << ". "<<this->board[i]->getMessage()<<"\t\t\t"<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<' '<<'|'<< i+31 << ". "<<this->board[i+30]->getMessage()<<"\t\t\t";
+				if(this->numSquares>=i+61) cout<<' '<<simboli_gioc_uno[i+60]<<' '<<simboli_gioc_due[i+60]<<' '<<simboli_gioc_tre[i+60]<<' '<<simboli_gioc_quattro[i+60]<<' '<<'|'<< i+61 << "."<<this->board[i+60]->getMessage()<<"\n";
+				else cout<<endl;
+			}
+		}
 }
 
 int Game::rollDice(){

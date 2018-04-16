@@ -40,7 +40,7 @@ private:
 
 	bool isFinish = false;
 
-	int numPlayers;
+	int numPlayers=0;
 	int defaultPlayers = 0; //indica i giocatori in bancarotta
 	bool allDefualt = false;
 
