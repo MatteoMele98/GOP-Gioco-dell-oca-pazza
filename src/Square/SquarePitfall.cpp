@@ -31,9 +31,9 @@ bool SquarePitfall::getBought(){
 }
 
 void SquarePitfall::buy(Game* game){
-	if(game->currentPlayer->getSum() >= this->cost){
+	if(game->players[game->indexCurrentPlayer]->getSum() >= this->cost){
 		char ans;
-		cout << "La casella numero " << game->currentPlayer->getPosition()+1;
+		cout << "La casella numero " << game->players[game->indexCurrentPlayer]->getPosition()+1;
 		cout << " costa: " << this->cost << "$" << endl;
 
 		do {
@@ -44,7 +44,7 @@ void SquarePitfall::buy(Game* game){
 
 		//acquisto della casella
 		if(ans == 's' || ans == 'S'){
-			char newMessage[];
+			char newMessage[10];
 
 			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
 			this->setBought();
@@ -63,9 +63,10 @@ void SquarePitfall::buy(Game* game){
 			cout << "Casella non acquistata." << endl;
 		}
 
-	} else
-		cout << game->currentPlayer->getName();
+	} else {
+		cout << game->players[game->indexCurrentPlayer]->getName();
 		cout << ",non hai abbasta soldi per comprare questa casella!" << endl;
+	}
 }
 
 void SquarePitfall::executeSquare(Game* game){

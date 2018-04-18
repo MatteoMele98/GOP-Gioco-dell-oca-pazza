@@ -15,6 +15,11 @@ int randomBetween (int min, int max);
 void pressEnter();
 //press enter to continue
 
+char* normalize(char* string, int maxChar);
+//precondition: string deve essere definita come: char string[maxChar+1]
+//completa string con spazi bianchi fino a al numero di maxChar di caratteri voluti
+//mette il carattere terminatore in ultima pos
+//es. normalize("ciao",10) --> "ciao------\0"
 
 
 #endif /* AUXILIARYFUNCTIONS_H_ */

@@ -65,7 +65,7 @@ void Player::printPlayerInfo(){
 	cout << this->symbol << " "<< this->name;
 	if(!this->isBankruptcy()) cout << " (" << this->sum << "$" << ") " << '\t';
 	else cout << " (" << "BANCAROTTA" << ")" << '\t';
-	cout  << "è in posizone: " << this->position << endl;
+	cout  << "è in posizone: " << this->position+1 << endl;
 }
 
 bool Player::isBankruptcy(){

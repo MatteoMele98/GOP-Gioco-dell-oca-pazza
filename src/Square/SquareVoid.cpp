@@ -8,7 +8,7 @@
 #include "SquareVoid.h"
 
 SquareVoid::SquareVoid() {
-		this->type = Void;
+		this->setType(SquareTypes::Void);
 		char initialMessage[] = "VUOTA";
 		strcpy(this->message, initialMessage);
 }

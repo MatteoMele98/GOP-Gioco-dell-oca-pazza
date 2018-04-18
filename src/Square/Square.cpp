@@ -29,4 +29,4 @@ char* Square::getMessage(){
 	return this->message;
 }
 
-void Square::executeSquare(Game* game){}
+

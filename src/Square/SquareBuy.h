@@ -11,7 +11,7 @@
 
 class SquareBuy: public SquarePitfall {
 private:
-	char ownership[max_length];
+	char ownership[max_lengthS];
 	int positiveEffect;		//set a positive effect (0 or 1)
 	int negativeEffect;		//set a positive effect (2 or 3)
 public:

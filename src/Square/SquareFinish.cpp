@@ -10,5 +10,5 @@
 SquareFinish::SquareFinish() {
 	char initialMessage[] = "FINE!";
 	this->setMessage(initialMessage);
-	this->setType(Finish);
+	this->setType(SquareTypes::Finish);
 }

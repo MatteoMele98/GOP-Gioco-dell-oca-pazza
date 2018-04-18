@@ -2,10 +2,13 @@
  * CardPickQuestion.cpp
  *
  *  Created on: 03 apr 2018
- *      Author: utente
+ *      Author: leo
  */
 
 #include "CardPickQuestion.h"
+#include "../AuxiliaryFunctions.h"
+
+class Game;
 
 CardPickQuestion::CardPickQuestion() {
 	char newMessage[] = "Rispondi a una domanda!";

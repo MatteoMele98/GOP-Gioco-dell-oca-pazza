@@ -27,9 +27,9 @@ char* SquareBuy::getOwnership(){
 }
 
 void SquareBuy::buy(Game* game){
-	if(game->currentPlayer->getSum() >= this->cost){
+	if(game->players[game->indexCurrentPlayer]->getSum() >= this->cost){
 		char ans;
-		cout << "La casella numero " << game->currentPlayer->getPosition()+1;
+		cout << "La casella numero " << game->players[game->indexCurrentPlayer]->getPosition()+1;
 		cout << " costa: " << this->cost << "$" << endl;
 
 		do {
@@ -40,23 +40,23 @@ void SquareBuy::buy(Game* game){
 
 		//acquisto della casella
 		if(ans == 's' || ans == 'S'){
-			char newMessage[];
+			char newMessage[10];
 
 			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
 			this->setBought();
 			game->decreasePlayerMoney(this->cost);
-			this->setOwnership(game->currentPlayer->getName());
+			this->setOwnership(game->players[game->indexCurrentPlayer]->getName());
 
-			sprintf(newMessage,"Proprietà di %s %s",game->currentPlayer->getSymbol(),game->currentPlayer->getName());
-			game->currentSquare->setMessage(newMessage);
+			sprintf(newMessage,"Proprietà di %s %s",game->players[game->indexCurrentPlayer]->getSymbol(),game->players[game->indexCurrentPlayer]->getName());
+			game->board[game->players[game->indexCurrentPlayer]->getPosition()]->setMessage(newMessage);
 
-			cout << game->currentPlayer->getName();
+			cout << game->players[game->indexCurrentPlayer]->getName();
 			cout << " , ora sei il proprietario di questa casella! Hai diritto all'effetto positivo!" << endl;
 			pressEnter();
 
 		    if(this->positiveEffect == effect::moveForward){
 		    	int steps = randomBetween(1,6);
-		    	cout << game->currentPlayer->getSymbol() << " " << game->currentPlayer->getName();
+		    	cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
 		    	cout << ",vai avanti di " << steps <<"!" << endl;
 				game->movePlayerForward(randomBetween(1,6));
 		    }
@@ -67,9 +67,10 @@ void SquareBuy::buy(Game* game){
 			cout << "Casella non acquistata." << endl;
 		}
 
-	} else
-		cout << game->currentPlayer->getName();
+	} else {
+		cout << game->players[game->indexCurrentPlayer]->getName();
 		cout << ", non hai abbasta soldi per comprare questa casella!" << endl;
+	}
 }
 
 
@@ -79,30 +80,30 @@ void SquareBuy::executeSquare(Game* game){
 		this->buy(game);
 	else {
 		//1. il giocatore corrente è il proprietario
-		if(!strcmp(this->getOwnership(),game->currentPlayer->getName())){
+		if(!strcmp(this->getOwnership(),game->players[game->indexCurrentPlayer]->getName())){
 
-			cout << game->currentPlayer->getSymbol() << " " << game->currentPlayer->getName();
+			cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
 			cout << ", sei il propritario di questa casella. Hai diritto ad un effetto positivo!" << endl;
 			pressEnter();
 
 			int steps = randomBetween(1,6);
 			if(this->positiveEffect == effect::moveForward){
-				cout << game->currentPlayer->getSymbol() << " " << game->currentPlayer->getName();
+				cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
 				cout << ",vai avanti di " << steps <<"!" << endl;
 				game->movePlayerForward(steps);
 			}
-			else if (this->positiveEffect() == effect::addMoney){
+			else if (this->positiveEffect == effect::addMoney){
 				game->increasePlayerMoney(sum[randomBetween(0,4)]);
 
 		} else {
 		//2. il giocatore corrente non è il proprietario
-			cout << game->currentPlayer->getSymbol() << " " << game->currentPlayer->getName();
+			cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
 			cout <<", questa casella è di proprietà di ";
 			cout << this->getOwnership() << ". Effetto negativo!" << endl;
 			pressEnter();
 
 			if(this->negativeEffect == effect::moveBackward){
-				cout << game->currentPlayer->getSymbol() << " " << game->currentPlayer->getName();
+				cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
 				cout << ",vai indietro di " << steps <<"!" << endl;
 				game->movePlayerBackward(steps);
 			}
@@ -110,4 +111,5 @@ void SquareBuy::executeSquare(Game* game){
 				game->decreasePlayerMoney(sum[randomBetween(0,4)]);
 		}
 	}
+  }
 }

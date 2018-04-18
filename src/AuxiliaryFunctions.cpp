@@ -5,9 +5,9 @@
  *      Author: Matteo
  */
 #include <cstdio>
+#include <cstring>
 #include <cstdlib>
 #include <iostream>
-#include <limits>
 
 #include "AuxiliaryFunctions.h"
 
@@ -20,7 +20,16 @@ int randomBetween(int min, int max){
 
 void pressEnter(){
 	//clearCin();
-    cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+    cin.ignore(5000,'\n');
 }
 
+char* normalize(char* string, int maxChar){
+    int nSpace = maxChar-strlen(string);
+    for(int i=0; i<nSpace; i++)
+        strcat(string,"*");
+
+    string[maxChar+1] = '\0';
+
+    return string;
+}
 

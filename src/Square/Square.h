@@ -15,6 +15,7 @@
 #include "../Game/Game.h"
 #include "../AuxiliaryFunctions.h"
 
+class Game;
 
 const int max_lengthS = 100;
 
@@ -32,7 +33,6 @@ class Square {
 protected:
 	int type;
 	char message[max_lengthS];
-	virtual ~Square(){}; //virtual destructor
 
 public:
 	Square();
@@ -41,8 +41,8 @@ public:
 	void setMessage(char message[]);
 	char* getMessage();
 
-	void virtual buy(Game* game);	//override in pitfall and buy square
-	void virtual executeSquare(Game* game);
+	void virtual buy(Game* game){};	//override in pitfall and buy square
+	void virtual executeSquare(Game* game){};
 
 };
 

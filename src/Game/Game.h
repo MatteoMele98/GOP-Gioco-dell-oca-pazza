@@ -9,12 +9,20 @@
 #define GAME_GAME_H_
 
 #include <cstring>
+#include <ctime>
+#include <cstdlib>
 #include <iostream>
+#include <iomanip>
 
 #include "../Square/Square.h"
 #include "../Player/Player.h"
-#include "../Deck/Deck.h"
+#include "../Card/Card.h"
 #include "../AuxiliaryFunctions.h"
+
+class Square;
+class Card;
+
+//#include "../Deck/Deck.h"
 
 
 extern int sum[]; 	//array of prices/bonus/malus of money. Implemented in Game
@@ -34,9 +42,8 @@ enum effect {
 
 class Game {
 private:
-	Player* players[4];
-	Square* board[100];
-	Deck* deck;
+
+	//Deck* deck;
 
 	bool isFinish = false;
 
@@ -46,7 +53,6 @@ private:
 
 	int numSquares = 0;
 
-	int indexCurrentPlayer = 0;
 	int currentTurn = 1; //indica il turno corrente
 	int headPlayer = 0;	//numero (nell'array) del giocatore in testa   0-3 <----- il vincitore è qui
 	int tilePlayer = 0; //numero (nell'array) del giocatore in coda    0-3
@@ -72,15 +78,21 @@ private:
 
 	//auxiliary
 	//setta il giocatore in testa e quello in coda
+	void printRecap();
 	void checkHeadTilePlayer();
 	void printHeadTilePlayers();
+	bool firstTurn = true;
 
 public:
 	Game();
 
-	//current player and current square. Used in card and square classes
-	Player* currentPlayer = players[this->indexCurrentPlayer];
-	Square* currentSquare = board[this->currentPlayer->getPosition()];
+	int indexCurrentPlayer = 0;
+	Player* players[4];
+	Square* board[100];
+
+//	//current player and current square. Used in card and square classes
+//	Player* currentPlayer = players[this->indexCurrentPlayer];
+//	Square* currentSquare = board[this->currentPlayer->getPosition()];
 
 	//decrementa i soldi del player corrente, controlla la bancarotta
 	void decreasePlayerMoney(int sum);
