@@ -22,7 +22,7 @@ int Square::getType(){
 }
 
 void Square::setMessage(char message[]){
-	strncpy(this->message,message,max_lengthS-1);
+	strncpy(this->message,message,max_length);
 }
 
 char* Square::getMessage(){

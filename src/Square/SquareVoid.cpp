@@ -10,6 +10,7 @@
 SquareVoid::SquareVoid() {
 		this->setType(SquareTypes::Void);
 		char initialMessage[] = "VUOTA";
+		normalize(initialMessage,max_length);
 		strcpy(this->message, initialMessage);
 }
 

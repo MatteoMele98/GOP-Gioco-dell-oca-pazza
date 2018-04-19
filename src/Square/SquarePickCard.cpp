@@ -8,7 +8,8 @@
 #include "SquarePickCard.h"
 
 SquarePickCard::SquarePickCard() {
-	char initialMessage[] = "Pesca una carta!";
+	char initialMessage[] = "Pesca una carta ";
+	normalize(initialMessage,max_length);
 	this->setMessage(initialMessage);
 	this->setType(SquareTypes::PickCard);
 }

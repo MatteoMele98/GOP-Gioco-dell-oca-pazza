@@ -28,6 +28,7 @@ using namespace std;
 
 
 int sum[] = {1000,1500,2000,2500,3000};
+int max_length = 51;
 
 
 Game::Game() {
@@ -107,7 +108,7 @@ void Game::printRules(){
 	cout << '\t' << '\t' << "o un giocatore arriva nella casella finale" << endl;
 	cout << '\t' << '\t' << "o tutti i giocatori vanno in bancarotta" << endl;
 	cout << endl << endl;
-	cout <<'\t' << " Ora sapete tutto! Quindi ..." << endl;
+	cout <<'\t' << " Ora sapete tutto! Quindi ... (Questo è il momento giusto per premere Invio :) )" << endl;
 	pressEnter();
 	cout << '\t' << '\t' << "BUON DIVERTIMENTO!" << endl;
 
@@ -127,7 +128,7 @@ void Game::initBoard(){
 	for(int i=1; i<this->numSquares-1; i++){
 		randNumb=rand() % 100+1;
 		if(randNumb<=chance){
-			this->board[i] = new Square(); //casella normale
+			this->board[i] = new SquareVoid(); //casella normale
 			chance = chance-30;
 		}
 		else{
@@ -289,7 +290,7 @@ void Game::printBoard(){
 }
 
 int Game::rollDice(){
-	int steps = randomBetween(1,12);
+	int steps = randomBetween(2,12);
 
 	cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
 	cout << " tira i dadi ... ";

@@ -9,6 +9,7 @@
 
 SquareStart::SquareStart() {
 	char initialMessage[] = "PARTENZA!";
+	normalize(initialMessage,max_length);
 	this->setMessage(initialMessage);
 	this->setType(SquareTypes::Start);
 }

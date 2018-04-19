@@ -17,7 +17,6 @@
 
 class Game;
 
-const int max_lengthS = 100;
 
 enum SquareTypes{
 	Void,		//=0
@@ -32,7 +31,7 @@ enum SquareTypes{
 class Square {
 protected:
 	int type;
-	char message[max_lengthS];
+	char message[max_length];
 
 public:
 	Square();

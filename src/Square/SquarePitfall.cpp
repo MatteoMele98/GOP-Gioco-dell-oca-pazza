@@ -11,6 +11,7 @@ SquarePitfall::SquarePitfall() {
 	this->cost =  sum[randomBetween(0,4)];
 	this->setType(SquareTypes::Pitfall);
 	sprintf(this->message,"COMPRA? (%d$)",this->cost);
+	normalize(this->message,max_length);
 }
 
 void SquarePitfall::setCost(int cost){
@@ -44,7 +45,7 @@ void SquarePitfall::buy(Game* game){
 
 		//acquisto della casella
 		if(ans == 's' || ans == 'S'){
-			char newMessage[10];
+			char newMessage[max_length];
 
 			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
 			this->setBought();
@@ -56,6 +57,7 @@ void SquarePitfall::buy(Game* game){
 
 			sprintf(newMessage,"%s", "TRAPPOLA");
 			//setto il nuovo messaggio per la stampa del tabellone
+			normalize(newMessage,max_length);
 			this->setMessage(newMessage);
 
 		} else {

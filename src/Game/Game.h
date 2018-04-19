@@ -22,10 +22,8 @@
 class Square;
 class Card;
 
-//#include "../Deck/Deck.h"
-
-
-extern int sum[]; 	//array of prices/bonus/malus of money. Implemented in Game
+extern int sum[]; 		//array of prices/bonus/malus of money. Implemented in Game
+extern int max_length;	//max chars in a string
 using namespace std;
 
 

@@ -40,7 +40,7 @@ void SquareBuy::buy(Game* game){
 
 		//acquisto della casella
 		if(ans == 's' || ans == 'S'){
-			char newMessage[10];
+			char newMessage[max_length];
 
 			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
 			this->setBought();
@@ -48,6 +48,7 @@ void SquareBuy::buy(Game* game){
 			this->setOwnership(game->players[game->indexCurrentPlayer]->getName());
 
 			sprintf(newMessage,"Proprietà di %s %s",game->players[game->indexCurrentPlayer]->getSymbol(),game->players[game->indexCurrentPlayer]->getName());
+			normalize(newMessage,max_length);
 			game->board[game->players[game->indexCurrentPlayer]->getPosition()]->setMessage(newMessage);
 
 			cout << game->players[game->indexCurrentPlayer]->getName();
