@@ -26,7 +26,7 @@ void pressEnter(){
 char* normalize(char* string, int maxChar){
     int nSpace = maxChar-strlen(string);
     for(int i=0; i<nSpace; i++)
-        strcat(string,"*");
+        strcat(string," ");
 
     string[maxChar+1] = '\0';
 
