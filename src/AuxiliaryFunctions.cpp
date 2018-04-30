@@ -26,7 +26,7 @@ void pressEnter(){
 char* normalize(char* dest, int size){
 
 	int len = strlen(dest);
-	int num_of_spaces = size - len;
+	int num_of_spaces = size - len - 20;
 
 	for(int i=0; i<num_of_spaces;i++)
 		strcat(dest," ");

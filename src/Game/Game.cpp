@@ -166,7 +166,7 @@ void Game::initPlayers(){
 void Game::gameLoop(){
 
 	//stampa del primo turno
-	if(this->currentTurn == 1 && this->firstTurn){
+	if(this->firstTurn){
 		this->firstTurn = false;
 		this->printCurrentTurn();
 	}
@@ -263,7 +263,7 @@ void Game::printBoard(){
 				else
 					cout <<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 <<'.'<<this->board[i]->getMessage()<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<' '<<'|'<< i+31 <<'.'<<this->board[i+30]->getMessage();
 				if(this->numSquares>=i+61){
-					cout<<' '<<simboli_gioc_uno[i+60]<<' '<<simboli_gioc_due[i+60]<<' '<<simboli_gioc_tre[i+60]<<' '<<simboli_gioc_quattro[i+60]<<' '<<'|'<< i+61 << "."<<this->board[i+60]->getMessage()<< endl << endl;
+					cout<<' '<<simboli_gioc_uno[i+60]<<' '<<simboli_gioc_due[i+60]<<' '<<simboli_gioc_tre[i+60]<<' '<<simboli_gioc_quattro[i+60]<<' '<<'|'<< i+61 << "."<<this->board[i+60]->getMessage()<< endl;
 				}
 				else cout<<endl;
 			}
@@ -357,14 +357,15 @@ void Game::swapPlayerHead(){
 		int posTmp = this->players[this->indexCurrentPlayer]->getPosition();
 		this->players[this->indexCurrentPlayer]->setPosition(this->players[this->headPlayer]->getPosition());
 		this->players[this->headPlayer]->setPosition(posTmp);
-	} else
-	cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
-	cout <<", sei già il giocatore in testa." << endl;
+	} else {
+		cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
+		cout <<", sei già il giocatore in testa." << endl;
+	}
 
 }
 
 void Game::swapPlayerTile(){
-	if(this->players[this->indexCurrentPlayer]->getNumberPlayer() != this->players[this->headPlayer]->getNumberPlayer()){
+	if(this->players[this->indexCurrentPlayer]->getNumberPlayer() != this->players[this->tilePlayer]->getNumberPlayer()){
 		int posTmp = this->players[this->indexCurrentPlayer]->getPosition();
 		this->players[this->indexCurrentPlayer]->setPosition(this->players[this->tilePlayer]->getPosition());
 		this->players[this->tilePlayer]->setPosition(posTmp);
@@ -469,7 +470,23 @@ void Game::printLooser(){
 }
 
 void Game::endMessage(){
+	char* test[] ={
+				"* * * * * * * * * * * * * * * * * * * * * * * * *",
+			    "*           Grazie per aver giocato!     		 *",
+				"* 				  Realizzato da:				 *",
+				"*					Matteo Mele				     *",
+				"*				  Vincenzo Armandi				 *",
+				"*   			Leonardo Pio Palumbo			 *",
+				"*   											 *",
+				"*   	Unibo, Esame Programmazione 2017/2018  	 *",
+				"* * * * * * * * * * * * * * * * * * * * * * * * *",
+		};
 
+		for(int i=0; i<9; i++){
+		    for(int j=0; j<4; j++)
+		        cout << '\t';
+			cout <<test[i]<<endl;
+		}
 }
 
 
