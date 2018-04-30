@@ -406,24 +406,22 @@ void Game::printRecap(){
 
 Card* Game::pickCard(){
 	Card* tmpCard;
-	tmpCard = new CardPickQuestion();
+	int numR = (rand() % 100+1);
 
-//	int numR = (rand() % 100+1);
-//
-//	if (numR < 25)
-//		tmpCard = new CardLoseMoney();
-//	if(numR < 50)
-//		tmpCard = new CardAddMoney();
-//	if(numR < 55)
-//		tmpCard = new CardSwapHead();
-//	if(numR < 60)
-//		tmpCard = new CardSwapTile();
-//	if(numR < 80)
-//		tmpCard = new CardPickQuestion();
-//	if(numR < 90)
-//		tmpCard = new CardMoveForward();
-//	if(numR <= 100)
-//		tmpCard = new CardMoveBackward();
+	if (numR < 25)
+		tmpCard = new CardLoseMoney();
+	if(numR < 50)
+		tmpCard = new CardAddMoney();
+	if(numR < 55)
+		tmpCard = new CardSwapHead();
+	if(numR < 60)
+		tmpCard = new CardSwapTile();
+	if(numR < 80)
+		tmpCard = new CardPickQuestion();
+	if(numR < 90)
+		tmpCard = new CardMoveForward();
+	if(numR <= 100)
+		tmpCard = new CardMoveBackward();
 
   return tmpCard;
 
