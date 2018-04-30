@@ -17,11 +17,11 @@ char* symbols[] = { fulmine, razzo, chitarra, pallone};
 //-------> symbols: fulimine, razzo, chitarra, pallone
 
 Player::Player(char name[],int numPlayer){
-	strcpy(this->name,name);
+	strncpy(this->name,name,max_lengthP-1);
 	this->numberPlayer = numPlayer+1;
-	this->position = 0; //initial square
+	this->position = 0;
 	this->symbol = symbols[numPlayer];
-	this->sum = 10000; //initial sum
+	this->sum = 10000;
 }
 
 void Player::setBankruptcy(){

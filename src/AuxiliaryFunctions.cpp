@@ -23,13 +23,15 @@ void pressEnter(){
     cin.ignore(5000,'\n');
 }
 
-char* normalize(char* string, int maxChar){
-    int nSpace = maxChar-strlen(string);
-    for(int i=0; i<nSpace; i++)
-        strcat(string," ");
+char* normalize(char* dest, int size){
 
-    string[maxChar+1] = '\0';
+	int len = strlen(dest);
+	int num_of_spaces = size - len;
 
-    return string;
+	for(int i=0; i<num_of_spaces;i++)
+		strcat(dest," ");
+
+	return dest;
 }
+
 

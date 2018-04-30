@@ -18,12 +18,12 @@
 #include "../Player/Player.h"
 #include "../Card/Card.h"
 #include "../AuxiliaryFunctions.h"
+#include "../Questions.h"
 
 class Square;
 class Card;
 
 extern int sum[]; 		//array of prices/bonus/malus of money. Implemented in Game
-extern int max_length;	//max chars in a string
 using namespace std;
 
 

@@ -15,8 +15,7 @@ extern char* symbols[];
 
 class Player {
 private:
-
-	char name[max_lengthP];
+	char name[max_lengthP+1];
 	int numberPlayer;
 	int position;
 	int sum;

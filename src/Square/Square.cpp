@@ -9,8 +9,8 @@
 
 Square::Square() {
 	this->type = -1;
-	char initialMessage[] = "default";
-	strcpy(this->message, initialMessage);
+	char initialMessage[max_length+1] = "default";
+	this->setMessage(initialMessage);
 }
 
 void Square::setType(int t){
@@ -21,8 +21,8 @@ int Square::getType(){
 	return this->type;
 }
 
-void Square::setMessage(char message[]){
-	strncpy(this->message,message,max_length);
+void Square::setMessage(char newMessage[]){
+	strcpy(this->message,newMessage);
 }
 
 char* Square::getMessage(){

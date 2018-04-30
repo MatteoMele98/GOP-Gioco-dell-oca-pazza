@@ -8,8 +8,7 @@
 #include "SquareStart.h"
 
 SquareStart::SquareStart() {
-	char initialMessage[] = "PARTENZA!";
-	normalize(initialMessage,max_length);
-	this->setMessage(initialMessage);
 	this->setType(SquareTypes::Start);
+	char initialMessage[max_length+1] = "PARTENZA!";
+	this->setMessage(normalize(initialMessage,max_length));
 }

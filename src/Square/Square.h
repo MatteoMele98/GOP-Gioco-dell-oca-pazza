@@ -27,11 +27,12 @@ enum SquareTypes{
 	Finish		//=5
 };
 
+const int max_length = 50;
 
 class Square {
 protected:
 	int type;
-	char message[max_length];
+	char message[max_length+1];
 
 public:
 	Square();

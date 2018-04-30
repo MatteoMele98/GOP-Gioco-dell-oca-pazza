@@ -8,7 +8,8 @@
 #include "SquareFinish.h"
 
 SquareFinish::SquareFinish() {
-	char initialMessage[] = "FINE!";
-	this->setMessage(initialMessage);
 	this->setType(SquareTypes::Finish);
+	char initialMessage[max_length+1] = "FINE!";
+	this->setMessage(normalize(initialMessage,max_length));
+
 }

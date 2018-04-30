@@ -10,8 +10,11 @@
 SquarePitfall::SquarePitfall() {
 	this->cost =  sum[randomBetween(0,4)];
 	this->setType(SquareTypes::Pitfall);
-	sprintf(this->message,"COMPRA? (%d$)",this->cost);
-	normalize(this->message,max_length);
+
+	char initialMessage[max_length+1];
+	sprintf(initialMessage,"COMPRA? (%d$)",this->cost);
+	normalize(initialMessage,max_length);
+	this->setMessage(initialMessage);
 }
 
 void SquarePitfall::setCost(int cost){
@@ -41,11 +44,11 @@ void SquarePitfall::buy(Game* game){
 			cout << "Vuoi acquistarla? ['s' per sì/'n' per no]" << endl;
 			cin >> ans;
 			cin.ignore(100,'\n');
-		} while (ans != 's' || ans != 'S' || ans != 'n' || ans != 'N');
+		} while (ans != 's' && ans != 'S' && ans != 'n' && ans != 'N');
 
 		//acquisto della casella
 		if(ans == 's' || ans == 'S'){
-			char newMessage[max_length];
+			char newMessage[max_length+1];
 
 			//setto la casella su Bought per evitare che qualquno la possa ri-comprare
 			this->setBought();

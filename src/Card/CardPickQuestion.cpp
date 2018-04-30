@@ -24,15 +24,22 @@ void CardPickQuestion::executeCard(Game* game){
 
 		cout << "Risposta corretta!" << endl << "Ricevi effetto positivo:" << endl;
 		effect = randomBetween(effect::moveForward,effect::addMoney);
-		if(effect == effect::moveForward)
-			game->movePlayerForward(randomBetween(1,6));
+		if(effect == effect::moveForward){
+			int steps = randomBetween(1,6);
+			cout << "vai avanti di... " << steps << endl;
+			game->movePlayerForward(steps);
+		}
+
 		else
 			game->increasePlayerMoney(sum[randomBetween(0,4)]);
 	} else {
 		cout << "Risposta sbagliata... " << endl << "Subisci effetto negativo:" << endl;
 		effect = randomBetween(effect::moveBackward,effect::loseMoney);
-		if(effect == effect::moveBackward)
-			game->movePlayerBackward(randomBetween(1,6));
+		if(effect == effect::moveBackward){
+			int steps = randomBetween(1,6);
+			cout << "vai iniestro di... " << steps << endl;
+			game->movePlayerBackward(steps);
+		}
 		else
 			game->decreasePlayerMoney(sum[randomBetween(0,4)]);
 	}

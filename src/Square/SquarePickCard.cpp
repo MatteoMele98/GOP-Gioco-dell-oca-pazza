@@ -8,14 +8,15 @@
 #include "SquarePickCard.h"
 
 SquarePickCard::SquarePickCard() {
-	char initialMessage[] = "Pesca una carta ";
+	char initialMessage[max_length+1] = "Pesca una carta ";
+	this->setType(SquareTypes::PickCard);
+
 	normalize(initialMessage,max_length);
 	this->setMessage(initialMessage);
-	this->setType(SquareTypes::PickCard);
 }
 
 void SquarePickCard::executeSquare(Game* game){
-	cout << this->message << "... " << endl;
+	cout << "... " <<  this->message << endl;
 	pressEnter();
 	game->pickCard()->executeCard(game);
 }
