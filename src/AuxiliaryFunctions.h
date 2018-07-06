@@ -21,5 +21,6 @@ char* normalize(char* dest, int num_of_spaces);
 //mette il carattere terminatore in ultima pos
 //es. normalize("ciao",10) --> "ciao------\0"
 
+void clearCin();
 
 #endif /* AUXILIARYFUNCTIONS_H_ */

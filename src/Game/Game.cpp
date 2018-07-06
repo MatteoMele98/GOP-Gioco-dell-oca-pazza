@@ -62,7 +62,7 @@ Game::Game() {
 void Game::startMessage(){
 char* test[] ={
 			"* * * *  * * * *  * * * *",
-		    "*        *     *  *     *",
+		  "*        *     *  *     *",
 			"*   * *  *     *  * * * *",
 			"*     *  *     *  *	  ",
 			"* * * *  * * * *  *	  "
@@ -87,7 +87,8 @@ void Game::printRules(){
 	for(int i=0; i<135; i++)
 		cout << "_";
 	cout << endl << endl;
-
+	//1 significa bold
+	cout<< "\033[1;31mbold red text\033[0m\n";
 	cout << '\t' << "- Premere invio per andare avanti nei vari momenti di gioco." << endl;
 	cout << '\t' << "- I giocatori lanciano a turno i dadi, avanzano nella casella corrispondente";
 	cout <<"e ne eseguono l'effetto."<< endl;
@@ -98,17 +99,17 @@ void Game::printRules(){
 	cout << '\t' << '\t' << "o COMPRA" << endl;
 	cout << '\t' << '\t' << "o PESCA UNA CARTA" << endl;
 	cout << '\t' << '\t' << "o FINE" << endl;
-	cout <<'\t' << "- Ogni giocatore ha una somma di denaro che può usare per comprare le caselle di tipo COMPRA." << endl;
+	cout <<'\t' << "- Ogni giocatore ha una somma di denaro che puÃ² usare per comprare le caselle di tipo COMPRA." << endl;
 	cout <<'\t' << " Una volta acquistate, tali caselle daranno un effetto positivo al proprietario (istantaneamente e nei momenti successivi)." << endl;
-	cout <<'\t' << " Non è finita qui però! Ogni volta che un giocatore avversario finirà su una casella già occupata subirà un effetto negativo" << endl;
-	cout <<'\t' << "- E' necessario però acquistare con parsimonia ... nel tabellone sono disseminate caselle TRAPPOLA!" << endl;
-	cout <<'\t' << " Potranno essere acquistate, ma non ci sarà alcun effetto." << endl;
-	cout <<'\t' << "- Se il giocatore finisce i soldi non potra più giocare!" << endl;
+	cout <<'\t' << " Non Ã¨ finita qui perÃ²! Ogni volta che un giocatore avversario finirÃ  su una casella giÃ  occupata subirÃ  un effetto negativo" << endl;
+	cout <<'\t' << "- E' necessario perÃ² acquistare con parsimonia ... nel tabellone sono disseminate caselle TRAPPOLA!" << endl;
+	cout <<'\t' << " Potranno essere acquistate, ma non ci sarÃ  alcun effetto." << endl;
+	cout <<'\t' << "- Se il giocatore finisce i soldi non potra piÃ¹ giocare!" << endl;
 	cout <<'\t' << " Il gioco termina quando: " << endl;
 	cout << '\t' << '\t' << "o un giocatore arriva nella casella finale" << endl;
 	cout << '\t' << '\t' << "o tutti i giocatori vanno in bancarotta" << endl;
 	cout << endl << endl;
-	cout <<'\t' << " Ora sapete tutto! Quindi ... (Questo è il momento giusto per premere Invio :) )" << endl;
+	cout <<'\t' << " Ora sapete tutto! Quindi ... (Questo Ã¨ il momento giusto per premere Invio :) )" << endl;
 	pressEnter();
 	cout << '\t' << '\t' << "BUON DIVERTIMENTO!" << endl;
 
@@ -143,17 +144,45 @@ void Game::initBoard(){
 	}
 }
 void Game::initPlayers(){
-	while(!(this->numPlayers>=1 && this->numPlayers<=4)){
-		cout<<"Quanti giocatori siete? È possibile giocare da un minimo di un giocatore a un massimo di 4. ";
-		cin>>this->numPlayers;
-	}
-	char name[20];
-	for(int i=0; i<this->numPlayers; i++){
-		cout<<"Inserisci il nome del giocatore: ";
-		cin >> name;
-		this->players[i] = new Player(name,i);
-	}
-	pressEnter();
+	// Variabile di appoggio per leggere i nomi da tastiera
+    char name[50];
+
+    // Inserimento numero giocatori (da 1 a 4)
+    while (numPlayers < 1 || numPlayers > 4) {
+        cout << "Quanti giocatori siete? Ãˆ possibile giocare da un minimo di un giocatore a un massimo di 4: ";
+        cin >> this->numPlayers;
+        if (!cin.good() || numPlayers < 1 || numPlayers > 4) {
+            cout << "Valore errato! \n";
+            clearCin();
+        }
+    }
+
+    for (int i = 0; i < numPlayers; ++i) {
+        cout << "Inserisci il nome del giocatore " << i+1 << ": ";
+        cin >> name;
+        this->players[i] = new Player(name,i);
+    }
+
+    // Reset dello stream di input
+    cin.get();
+
+	// cin.clear();
+	// int x=0;
+	// do{
+	// 	cin.clear();
+	// 	cout<<"Quanti giocatori siete? Ãˆ possibile giocare da un minimo di un giocatore a un massimo di 4. ";
+	// 	cin>>x;
+	// 	cin.ignore(5000,'\n');
+	// }	while (cin.fail() || !(x>=1 && x<=4) );
+	// this->numPlayers=x;
+	// char name[20];
+	// for(int i=0; i<this->numPlayers; i++){
+	// 	cin.clear();
+	// 	cout<<"Inserisci il nome del giocatore: ";
+	// 	cin >> name;
+	// 	this->players[i] = new Player(name,i);
+	// }
+	// pressEnter();
 }
 
 
@@ -176,7 +205,7 @@ void Game::gameLoop(){
 	this->printHeadTilePlayers();
 	this->printBoard();
 
-	//il giocatore può giocare solo se NON è in bancarotta
+	//il giocatore puï¿½ giocare solo se NON ï¿½ in bancarotta
 	if(!this->players[this->indexCurrentPlayer]->isBankruptcy()){
 
 		//tiro dei dadi
@@ -193,7 +222,7 @@ void Game::gameLoop(){
 		pressEnter();
 	}
 	else
-		//se il giocatore è in bancarotta
+		//se il giocatore ï¿½ in bancarotta
 		cout << this->players[this->indexCurrentPlayer]->getName() << " sei in Bancarotta!" << endl;
 
 	//se tutti i giocatori sono in bancarotta
@@ -258,8 +287,10 @@ void Game::printBoard(){
 		for(int i=0; i<135; i++) cout<<"_";
 			cout<<endl;
 			for( int i = 0; i < 30; ++i ){
-				if(i<=8)
-				cout <<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 <<'.'<<this->board[i]->getMessage()<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<"  "<<'|'<< i+31 <<'.'<<this->board[i+30]->getMessage();
+				if(i<=8){
+					cout <<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 <<'.'<<this->board[i]->getMessage()<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<"  "<<'|'<< i+31 <<'.'<<this->board[i+30]->getMessage();
+
+				}
 				else
 					cout <<' '<<simboli_gioc_uno[i]<<' '<<simboli_gioc_due[i]<<' '<<simboli_gioc_tre[i]<<' '<<simboli_gioc_quattro[i]<<' '<<'|'<< i+1 <<'.'<<this->board[i]->getMessage()<<' '<<simboli_gioc_uno[i+30]<<' '<<simboli_gioc_due[i+30]<<' '<<simboli_gioc_tre[i+30]<<' '<<simboli_gioc_quattro[i+30]<<' '<<'|'<< i+31 <<'.'<<this->board[i+30]->getMessage();
 				if(this->numSquares>=i+61){
@@ -267,6 +298,9 @@ void Game::printBoard(){
 				}
 				else cout<<endl;
 			}
+			for(int i=0; i<135; i++) cout<<"_";
+				cout<<endl;
+
 }
 
 int Game::rollDice(){
@@ -325,7 +359,7 @@ void Game::movePlayerForward(int steps){
 		this->headPlayer = this->indexCurrentPlayer;
 		this->isFinish = true;
 	} else
-		//se il giocatore non è arrivato alla fine controllo se è in testa
+		//se il giocatore non ï¿½ arrivato alla fine controllo se ï¿½ in testa
 		this->checkHeadTilePlayer();
 
 	//aggiornamento posizione
@@ -359,7 +393,7 @@ void Game::swapPlayerHead(){
 		this->players[this->headPlayer]->setPosition(posTmp);
 	} else {
 		cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
-		cout <<", sei già il giocatore in testa." << endl;
+		cout <<", sei giï¿½ il giocatore in testa." << endl;
 	}
 
 }
@@ -371,7 +405,7 @@ void Game::swapPlayerTile(){
 		this->players[this->tilePlayer]->setPosition(posTmp);
 	} else {
 		cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
-		cout <<", sei già il giocatore in coda." << endl;
+		cout <<", sei giï¿½ il giocatore in coda." << endl;
 	}
 
 }
@@ -409,13 +443,13 @@ Card* Game::pickCard(){
 	Card* tmpCard;
 	int numR = (rand() % 100+1);
 
-	if (numR < 25)
+	if (numR < 7)
 		tmpCard = new CardLoseMoney();
-	if(numR < 50)
+	if(numR < 14)
 		tmpCard = new CardAddMoney();
-	if(numR < 55)
+	if(numR < 32)
 		tmpCard = new CardSwapHead();
-	if(numR < 60)
+	if(numR < 50)
 		tmpCard = new CardSwapTile();
 	if(numR < 80)
 		tmpCard = new CardPickQuestion();
@@ -459,7 +493,7 @@ bool Game::answerQuestion(){
  *
  */
 void Game::printWinner(){
-	cout << "Il vincitore è... " << endl;
+	cout << "Il vincitore Ã¨... " << endl;
 	pressEnter();
 	cout << players[this->headPlayer]->getSymbol() << " " << players[this->headPlayer]->getName() << "!" << endl;
 }
@@ -470,23 +504,22 @@ void Game::printLooser(){
 }
 
 void Game::endMessage(){
+	//cout << this->symbol << " \033[1;31m"<< this->name<<"\033[0m";
 	char* test[] ={
-				"* * * * * * * * * * * * * * * * * * * * * * * * *",
-			    "*           Grazie per aver giocato!     		 *",
-				"* 				  Realizzato da:				 *",
-				"*					Matteo Mele				     *",
-				"*				  Vincenzo Armandi				 *",
-				"*   			Leonardo Pio Palumbo			 *",
-				"*   											 *",
-				"*   	Unibo, Esame Programmazione 2017/2018  	 *",
+				"\033[1;31m*\033[0m * \033[1;32m*\033[0m * * * * * * * * * * * * * * * * * * * * * *",
+			  "*            Grazie per aver giocato!           *",
+				"*                 Realizzato da:                *",
+				"*                  Matteo Mele                  *",
+				"*                Vincenzo Armandi               *",
+				"*              Leonardo Pio Palumbo             *",
+				"*                                               *",
+				"*      Unibo, Esame Programmazione 2017/2018    *",
 				"* * * * * * * * * * * * * * * * * * * * * * * * *",
 		};
 
 		for(int i=0; i<9; i++){
-		    for(int j=0; j<4; j++)
+		    for(int j=0; j<6; j++)
 		        cout << '\t';
 			cout <<test[i]<<endl;
 		}
 }
-
-

@@ -31,7 +31,7 @@ void SquareBuy::buy(Game* game){
 		cout << " costa: " << this->cost << "$" << endl;
 
 		do {
-			cout << "Vuoi acquistarla? ['s' per sì/'n' per no]" << endl;
+			cout << "Vuoi acquistarla? ['s' per sÃ¬/'n' per no]" << endl;
 			cin >> ans;
 			cin.ignore(100,'\n');
 		} while (ans != 's' && ans != 'S' && ans != 'n' && ans != 'N');
@@ -45,8 +45,8 @@ void SquareBuy::buy(Game* game){
 			game->decreasePlayerMoney(this->cost);
 			this->setOwnership(game);
 
-			sprintf(newMessage,"Proprietà di %s %s",game->players[game->indexCurrentPlayer]->getSymbol(),game->players[game->indexCurrentPlayer]->getName());
-			normalize(newMessage,max_length);
+			sprintf(newMessage,"ProprietÃ  di %s %s",game->players[game->indexCurrentPlayer]->getSymbol(),game->players[game->indexCurrentPlayer]->getName());
+			normalize(newMessage,max_length+4);
 			this->setMessage(newMessage);
 
 			cout << game->players[game->indexCurrentPlayer]->getName();
@@ -74,11 +74,11 @@ void SquareBuy::buy(Game* game){
 
 
 void SquareBuy::executeSquare(Game* game){
-	//se è libera la si può comprare
+	//se ï¿½ libera la si puï¿½ comprare
 	if(!this->bought)
 		this->buy(game);
 	else {
-		//1. il giocatore corrente è il proprietario
+		//1. il giocatore corrente ï¿½ il proprietario
 		if(this->indexOwner == game->indexCurrentPlayer){
 			cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
 			cout << ", sei il propritario di questa casella. Hai diritto ad un effetto positivo!" << endl;
@@ -95,9 +95,9 @@ void SquareBuy::executeSquare(Game* game){
 			}
 
 		} else  {
-		//2. il giocatore corrente non è il proprietario
+		//2. il giocatore corrente non Ã¨ il proprietario
 			cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
-			cout <<", questa casella è di proprietà di ";
+			cout <<", questa casella Ã¨ di proprietÃ  di ";
 			cout << game->players[this->indexOwner]->getSymbol() << " " << game->players[this->indexOwner]->getName() << ". Effetto negativo!" << endl;
 			pressEnter();
 
@@ -112,4 +112,3 @@ void SquareBuy::executeSquare(Game* game){
 		}
 	}
 }
-

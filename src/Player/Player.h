@@ -18,6 +18,7 @@ private:
 	char name[max_lengthP+1];
 	int numberPlayer;
 	int position;
+	int color;
 	int sum;
 	char* symbol;
 	bool bankruptcy = false;
@@ -31,6 +32,7 @@ public:
 	void setPosition(int n);
 	int getPosition();
 	int getNumberPlayer();
+	int getColor();
 	char* getSymbol();
 	void setSum(int n);
 	int getSum();

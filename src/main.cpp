@@ -1,12 +1,12 @@
 ﻿//============================================================================
 // Name        : GOP.cpp
-// Author      : 
+// Author      :
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-#include "Game/Game.h"
+/*#include "Game/Game.h"
 
 
 int main(){
@@ -15,3 +15,4 @@ int main(){
 	return 0;
 }
 
+*/

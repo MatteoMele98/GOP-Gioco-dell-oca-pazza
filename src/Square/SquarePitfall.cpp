@@ -41,7 +41,7 @@ void SquarePitfall::buy(Game* game){
 		cout << " costa: " << this->cost << "$" << endl;
 
 		do {
-			cout << "Vuoi acquistarla? ['s' per sì/'n' per no]" << endl;
+			cout << "Vuoi acquistarla? ['s' per sÃ¬/'n' per no]" << endl;
 			cin >> ans;
 			cin.ignore(100,'\n');
 		} while (ans != 's' && ans != 'S' && ans != 'n' && ans != 'N');
@@ -75,8 +75,7 @@ void SquarePitfall::buy(Game* game){
 }
 
 void SquarePitfall::executeSquare(Game* game){
-	//se è libera la si può comprare
+	//se Ã¨ libera la si puÃ² comprare
 	if(!this->bought)
 		this->buy(game);
 }
-

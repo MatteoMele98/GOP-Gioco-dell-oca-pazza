@@ -6,6 +6,7 @@ AUX = src/AuxiliaryFunctions.cpp
 PLAYER = src/Player/Player.cpp
 SQUARE = src/Square/Square.cpp src/Square/SquareStart.cpp src/Square/SquarePitfall.cpp src/Square/SquarePickCard.cpp src/Square/SquareFinish.cpp src/Square/SquareBuy.cpp src/Square/SquareVoid.cpp
 GAME = src/Game/Game.cpp
-OBJ = $(OBJ_NAME).cpp $(CARD) $(AUX) $(SQUARE) $(PLAYER) $(DECK) $(GAME)
+QUESTIONS =src/Questions.cpp
+OBJ = $(OBJ_NAME).cpp $(CARD) $(AUX) $(SQUARE) $(PLAYER) $(DECK) $(GAME) $(QUESTIONS)
 all: $(OBJ)
 	$(CC) $(OBJ) -o main
