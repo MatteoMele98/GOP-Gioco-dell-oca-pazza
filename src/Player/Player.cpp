@@ -23,7 +23,7 @@ Player::Player(char name[],int numPlayer){
 	this->position = 0;
 	this->color = colors[numPlayer];
 	this->symbol = symbols[numPlayer];
-	this->sum = 3000;
+	this->sum = 10000;
 }
 
 void Player::setBankruptcy(){

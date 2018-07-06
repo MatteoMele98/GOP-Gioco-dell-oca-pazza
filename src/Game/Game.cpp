@@ -135,10 +135,10 @@ void Game::initBoard(){
 		else{
 			randNumb=rand() % 100+1;
 			chance=100;
-			if(randNumb<=34){
+			if(randNumb<=25){
 				this->board[i] =new SquarePitfall();
 			}
-			else if(randNumb<=67) this->board[i] = new SquarePickCard();
+			else if(randNumb<=70) this->board[i] = new SquarePickCard();
 			else if(randNumb<=100) this->board[i] = new SquareBuy();
 		}
 	}
@@ -443,19 +443,19 @@ Card* Game::pickCard(){
 	Card* tmpCard;
 	int numR = (rand() % 100+1);
 
-	if (numR < 7)
+	if (numR < 2)
 		tmpCard = new CardLoseMoney();
-	if(numR < 14)
+	else if(numR < 4)
 		tmpCard = new CardAddMoney();
-	if(numR < 32)
+	else if(numR < 36)
 		tmpCard = new CardSwapHead();
-	if(numR < 50)
+	else if(numR < 64)
 		tmpCard = new CardSwapTile();
-	if(numR < 80)
+	else if(numR < 88)
 		tmpCard = new CardPickQuestion();
-	if(numR < 90)
+	else if(numR < 90)
 		tmpCard = new CardMoveForward();
-	if(numR <= 100)
+	else if(numR <= 100)
 		tmpCard = new CardMoveBackward();
 
   return tmpCard;
@@ -468,8 +468,7 @@ bool Game::answerQuestion(){
 	bool correct = false;
 
 	cout << "DOMANDA: "<<endl;
-	cout << questions[indexQuestion].QuestionText;
-	cout << "Scegli una risposta tra le 4 alternative proposte"<<endl;
+	cout << questions[indexQuestion].QuestionText<<endl;
 	cout << "1)"<<questions[indexQuestion].Answer[0]<<"\t"<<"2)"<<questions[indexQuestion].Answer[1]<<endl<<"3)";
 	cout << questions[indexQuestion].Answer[2]<<"\t"<<"4)"<<questions[indexQuestion].Answer[3]<<"\t";
 	cout<<endl;

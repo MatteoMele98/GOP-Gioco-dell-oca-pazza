@@ -26,7 +26,7 @@ void CardPickQuestion::executeCard(Game* game){
 		effect = randomBetween(effect::moveForward,effect::addMoney);
 		if(effect == effect::moveForward){
 			int steps = randomBetween(1,6);
-			cout << "vai avanti di... " << steps << endl;
+			cout << "vai avanti di... " << steps <<" caselle."<< endl;
 			game->movePlayerForward(steps);
 		}
 
@@ -37,7 +37,7 @@ void CardPickQuestion::executeCard(Game* game){
 		effect = randomBetween(effect::moveBackward,effect::loseMoney);
 		if(effect == effect::moveBackward){
 			int steps = randomBetween(1,6);
-			cout << "vai iniestro di... " << steps << endl;
+			cout << "vai indietro di... " << steps <<" caselle." << endl;
 			game->movePlayerBackward(steps);
 		}
 		else
