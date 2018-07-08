@@ -74,11 +74,11 @@ void SquareBuy::buy(Game* game){
 
 
 void SquareBuy::executeSquare(Game* game){
-	//se � libera la si pu� comprare
+	//se è libera la si può comprare
 	if(!this->bought)
 		this->buy(game);
 	else {
-		//1. il giocatore corrente � il proprietario
+		//1. il giocatore corrente è il proprietario
 		if(this->indexOwner == game->indexCurrentPlayer){
 			cout << game->players[game->indexCurrentPlayer]->getSymbol() << " " << game->players[game->indexCurrentPlayer]->getName();
 			cout << ", sei il propritario di questa casella. Hai diritto ad un effetto positivo!" << endl;

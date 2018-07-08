@@ -25,11 +25,7 @@
 
 
 using namespace std;
-
-
 int sum[] = {1000,1500,2000,2500,3000};
-
-
 
 Game::Game() {
 	srand(time(0));
@@ -49,18 +45,13 @@ Game::Game() {
 		this->printLooser();
 
 	this->endMessage();
-
-
 }
 
 /*
- *
  * INIZIALIZZAZIONE
- *
  */
-
 void Game::startMessage(){
-char* test[] ={
+char* message[] ={
 			"* * * *  * * * *  * * * *",
 		  "*        *     *  *     *",
 			"*   * *  *     *  * * * *",
@@ -71,7 +62,7 @@ char* test[] ={
 	for(int i=0; i<5; i++){
 	    for(int j=0; j<7; j++)
 	        cout << '\t';
-		cout <<test[i]<<endl;
+		cout << message[i] <<endl;
 	}
 }
 
@@ -87,8 +78,7 @@ void Game::printRules(){
 	for(int i=0; i<135; i++)
 		cout << "_";
 	cout << endl << endl;
-	//1 significa bold
-	cout<< "\033[1;31mbold red text\033[0m\n";
+
 	cout << '\t' << "- Premere invio per andare avanti nei vari momenti di gioco." << endl;
 	cout << '\t' << "- I giocatori lanciano a turno i dadi, avanzano nella casella corrispondente";
 	cout <<"e ne eseguono l'effetto."<< endl;
@@ -135,10 +125,10 @@ void Game::initBoard(){
 		else{
 			randNumb=rand() % 100+1;
 			chance=100;
-			if(randNumb<=25){
+			if(randNumb<=20){
 				this->board[i] =new SquarePitfall();
 			}
-			else if(randNumb<=70) this->board[i] = new SquarePickCard();
+			else if(randNumb<=60) this->board[i] = new SquarePickCard();
 			else if(randNumb<=100) this->board[i] = new SquareBuy();
 		}
 	}
@@ -165,33 +155,12 @@ void Game::initPlayers(){
 
     // Reset dello stream di input
     cin.get();
-
-	// cin.clear();
-	// int x=0;
-	// do{
-	// 	cin.clear();
-	// 	cout<<"Quanti giocatori siete? È possibile giocare da un minimo di un giocatore a un massimo di 4. ";
-	// 	cin>>x;
-	// 	cin.ignore(5000,'\n');
-	// }	while (cin.fail() || !(x>=1 && x<=4) );
-	// this->numPlayers=x;
-	// char name[20];
-	// for(int i=0; i<this->numPlayers; i++){
-	// 	cin.clear();
-	// 	cout<<"Inserisci il nome del giocatore: ";
-	// 	cin >> name;
-	// 	this->players[i] = new Player(name,i);
-	// }
-	// pressEnter();
 }
 
 
 /*
- *
  * GAME LOOP
- *
  */
-
 void Game::gameLoop(){
 
 	//stampa del primo turno
@@ -205,16 +174,12 @@ void Game::gameLoop(){
 	this->printHeadTilePlayers();
 	this->printBoard();
 
-	//il giocatore pu� giocare solo se NON � in bancarotta
+	//il giocatore può giocare solo se NON è in bancarotta
 	if(!this->players[this->indexCurrentPlayer]->isBankruptcy()){
 
-		//tiro dei dadi
+		//tiro dei dadi - movimento - stampa tabellone
 		int steps = this->rollDice();
-
-		//movimento nella casella corrispondente
 		this->movePlayerForward(steps);
-
-		//stampa del tabellone aggioranto
 		this->printBoard();
 
 		//esecuzione della casella in base al tipo
@@ -222,7 +187,7 @@ void Game::gameLoop(){
 		pressEnter();
 	}
 	else
-		//se il giocatore � in bancarotta
+		//se il giocatore è in bancarotta
 		cout << this->players[this->indexCurrentPlayer]->getName() << " sei in Bancarotta!" << endl;
 
 	//se tutti i giocatori sono in bancarotta
@@ -231,21 +196,11 @@ void Game::gameLoop(){
 		this->allDefualt = true;
 	}
 
-	//giocatore successivo
 	this->nextPlayer();
 }
 
 //====================================================
 void Game::printCurrentTurn(){
-	/*
-	 *
-	 * ______________________________________________________________
-	 *
-	 *						TURNO this->currentTurn
-	 * ______________________________________________________________
-	 *
-	 */
-
 	for(int i=0; i<135; i++)
 		cout << "_";
 	cout << endl;
@@ -257,13 +212,11 @@ void Game::printCurrentTurn(){
 	for(int i=0; i<135; i++)
 			cout << "_";
 	cout << endl << endl;
-
 }
 
 void Game::printBoard(){
 	/*
 	 * per ogni casella viene stampato numero e messaggio associato
-	 *
 	 */
 	char simboli_gioc_uno[this->numSquares][12];
 	char simboli_gioc_due[this->numSquares][12];
@@ -359,15 +312,12 @@ void Game::movePlayerForward(int steps){
 		this->headPlayer = this->indexCurrentPlayer;
 		this->isFinish = true;
 	} else
-		//se il giocatore non � arrivato alla fine controllo se � in testa
+		//se il giocatore non è arrivato alla fine controllo se è in testa
 		this->checkHeadTilePlayer();
 
 	//aggiornamento posizione
 	cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
 	cout <<", sei nella casella " << this->players[this->indexCurrentPlayer]->getPosition()+1 << " di tipo: " << this->board[this->players[this->indexCurrentPlayer]->getPosition()]->getMessage() << endl;
-
-	//this->board[this->players[this->indexCurrentPlayer]->getPosition()]->executeSquare(this);
-
 }
 
 void Game::movePlayerBackward(int steps){
@@ -382,8 +332,6 @@ void Game::movePlayerBackward(int steps){
 	//aggiornamento posizione
 	cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
 	cout <<", sei nella casella " << this->players[this->indexCurrentPlayer]->getPosition()+1 << " di tipo: " << this->board[this->players[this->indexCurrentPlayer]->getPosition()]->getMessage() << endl;
-
-	//this->board[this->players[this->indexCurrentPlayer]->getPosition()]->executeSquare(this);
 }
 
 void Game::swapPlayerHead(){
@@ -393,7 +341,7 @@ void Game::swapPlayerHead(){
 		this->players[this->headPlayer]->setPosition(posTmp);
 	} else {
 		cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
-		cout <<", sei gi� il giocatore in testa." << endl;
+		cout <<", sei già il giocatore in testa." << endl;
 	}
 
 }
@@ -405,7 +353,7 @@ void Game::swapPlayerTile(){
 		this->players[this->tilePlayer]->setPosition(posTmp);
 	} else {
 		cout << this->players[this->indexCurrentPlayer]->getSymbol() << " " << this->players[this->indexCurrentPlayer]->getName();
-		cout <<", sei gi� il giocatore in coda." << endl;
+		cout <<", sei già il giocatore in coda." << endl;
 	}
 
 }
@@ -459,7 +407,6 @@ Card* Game::pickCard(){
 		tmpCard = new CardMoveBackward();
 
   return tmpCard;
-
 }
 
 bool Game::answerQuestion(){
@@ -469,14 +416,15 @@ bool Game::answerQuestion(){
 
 	cout << "DOMANDA: "<<endl;
 	cout << questions[indexQuestion].QuestionText<<endl;
-	cout << "1)"<<questions[indexQuestion].Answer[0]<<"\t"<<"2)"<<questions[indexQuestion].Answer[1]<<endl<<"3)";
-	cout << questions[indexQuestion].Answer[2]<<"\t"<<"4)"<<questions[indexQuestion].Answer[3]<<"\t";
+	cout << "1)"<<questions[indexQuestion].Answer[0]<<"\t\t"<<"2)"<<questions[indexQuestion].Answer[1]<<endl<<"3)";
+	cout << questions[indexQuestion].Answer[2]<<"\t\t"<<"4)"<<questions[indexQuestion].Answer[3]<<"\t";
 	cout<<endl;
 
 	do {
-	cout<<"Inserisci il numero corrispondente alla tua risposta (1-4): ";
-	cin>>answer;
-	} while((answer<1)||(answer>4));
+	cout << "Inserisci il numero corrispondente alla tua risposta (1-4): ";
+	cin >> answer;
+	clearCin();
+} while(!cin.good() || answer<1 ||answer>4);
 
 	if(answer == questions[indexQuestion].CorrectAnswer)
 		correct = true;
@@ -484,12 +432,8 @@ bool Game::answerQuestion(){
 	return correct;
 }
 
-
-
 /*
- *
  * FINE
- *
  */
 void Game::printWinner(){
 	cout << "Il vincitore è... " << endl;
@@ -504,8 +448,8 @@ void Game::printLooser(){
 
 void Game::endMessage(){
 	//cout << this->symbol << " \033[1;31m"<< this->name<<"\033[0m";
-	char* test[] ={
-				"\033[1;31m*\033[0m * \033[1;32m*\033[0m * * * * * * * * * * * * * * * * * * * * * *",
+	char* message[] = {
+				"* * * * * * * * * * * * * * * * * * * * * * * * *",
 			  "*            Grazie per aver giocato!           *",
 				"*                 Realizzato da:                *",
 				"*                  Matteo Mele                  *",
@@ -519,6 +463,6 @@ void Game::endMessage(){
 		for(int i=0; i<9; i++){
 		    for(int j=0; j<6; j++)
 		        cout << '\t';
-			cout <<test[i]<<endl;
+			cout <<message[i]<<endl;
 		}
 }

@@ -7,10 +7,11 @@
 
 #ifndef PLAYER_PLAYER_H_
 #define PLAYER_PLAYER_H_
-#include <cstring> //put it in game
-#include <iostream>//put it in game
+#include <cstring>
+#include <string>
+#include <iostream>
 
-const int max_lengthP = 30; //one unique max_length definition
+const int max_lengthP = 30;
 extern char* symbols[];
 
 class Player {
@@ -18,7 +19,6 @@ private:
 	char name[max_lengthP+1];
 	int numberPlayer;
 	int position;
-	int color;
 	int sum;
 	char* symbol;
 	bool bankruptcy = false;
@@ -32,14 +32,11 @@ public:
 	void setPosition(int n);
 	int getPosition();
 	int getNumberPlayer();
-	int getColor();
 	char* getSymbol();
 	void setSum(int n);
 	int getSum();
 	void setBankruptcy();
-
 	void printPlayerInfo();
-
 	bool isBankruptcy();
 	void resetAlreadyBought(); //resetta alreadybuy alla fine del turno
 };
